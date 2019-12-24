@@ -8,7 +8,7 @@ It's an open source project , providing in-depth knowledge about building micros
 
 - [RESTful API](https://www.restapitutorial.com) implementation with [ASP.NET Core](https://docs.microsoft.com/en-us/aspnet/core/?view=aspnetcore-3.1)
 - [Domain Driven Design](http://dddcommunity.org) fundamentals
-- SQL and NoSQL databases ([SQL Server](https://www.microsoft.com/en-us/sql-server/sql-server-2017), [MongoDB](https://www.mongodb.com)
+- SQL and NoSQL databases ([SQL Server](https://www.microsoft.com/en-us/sql-server/sql-server-2017), [MongoDB](https://www.mongodb.com))
 - Distributed caching with [Redis](https://redis.io)
 - [API Gateway](https://microservices.io/patterns/apigateway.html) and other patterns designed for microservices
 - [JWT](https://jwt.io), authentication, authorization
