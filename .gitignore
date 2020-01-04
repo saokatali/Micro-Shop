@@ -34,3 +34,7 @@
 /src/Notifications/Notifications.UnitTests/obj
 /src/Notifications/Notifications.UnitTests/bin
 /src/Notifications/.vs
+/src/Common/MessageBrokers.RabbitMQ/obj
+/src/Common/MessageBrokers.RabbitMQ/.vs
+/src/Common/MessageBrokers.RabbitMQ/bin
+/src/Common/.vs
