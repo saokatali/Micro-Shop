@@ -38,3 +38,9 @@
 /src/Common/MessageBrokers.RabbitMQ/.vs
 /src/Common/MessageBrokers.RabbitMQ/bin
 /src/Common/.vs
+/src/Services/Identity/Identity.API/obj
+/src/Services/Identity/Identity.API/bin
+/src/Services/Identity/Identity.API/Migrations
+/src/Services/Identity/.vs
+/src/Services/Identity/Identity.UnitTests/obj
+/src/Services/Identity/Identity.UnitTests/bin
