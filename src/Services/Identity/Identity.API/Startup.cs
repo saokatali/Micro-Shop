@@ -34,7 +34,7 @@ namespace Identity.API
             services.AddOptions();
             services.Configure<AppSettings>(Configuration);
             services.AddDbContext<AppDbContext>(ServiceLifetime.Scoped);
-            services.AddIdentity<AppUser, IdentityRole>().AddEntityFrameworkStores<AppDbContext>();
+            services.AddIdentity<AppUser, AppRole>().AddEntityFrameworkStores<AppDbContext>();
 
             //services.AddAuthentication(options =>
             //{

@@ -81,13 +81,13 @@ namespace Identity.API.Controllers
 
         }
 
-        private string GenerateJwtToken(string email, IdentityUser user)
+        private string GenerateJwtToken(string email, AppUser user)
         {
             var claims = new List<Claim>
             {
                 new Claim(JwtRegisteredClaimNames.Email, email),
                 new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
-                new Claim("userId", user.Id),
+                new Claim("userId", user.Id.ToString()),
                 new Claim(JwtRegisteredClaimNames.UniqueName, email)
 
             };

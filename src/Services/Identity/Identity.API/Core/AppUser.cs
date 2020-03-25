@@ -6,8 +6,9 @@ using System.Threading.Tasks;
 
 namespace Identity.API.Core
 {
-    public class AppUser:IdentityUser
+    public class AppUser:IdentityUser<Guid>
     {
+
 
     }
 }

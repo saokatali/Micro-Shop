@@ -2,10 +2,11 @@
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
+using System;
 
 namespace Identity.API.Infrastructure
 {
-    public class AppDbContext:IdentityDbContext<AppUser>
+    public class AppDbContext:IdentityDbContext<AppUser,AppRole,Guid>
     {
         AppSettings appSettings;
         public AppDbContext(IOptionsSnapshot<AppSettings> appSettings)
