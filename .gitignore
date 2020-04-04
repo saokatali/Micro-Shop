@@ -44,3 +44,11 @@
 /src/Services/Identity/.vs
 /src/Services/Identity/Identity.UnitTests/obj
 /src/Services/Identity/Identity.UnitTests/bin
+/src/Common/Web.Middleware/obj
+/src/Common/Web.Middleware/bin
+/src/Services/Catalog/.vs
+/src/Services/Catalog/Catalog.API/obj
+/src/Services/Catalog/Catalog.API/bin
+/src/Services/Catalog/Catalog.UnitTests/obj
+/src/Services/Catalog/Catalog.UnitTests/bin
+/src/Services/Catalog/Catalog.API/*.user

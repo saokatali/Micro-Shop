@@ -1,7 +1,13 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <OutputType>Library</OutputType>
+    <RootNamespace>Common.MessageBrokers.RabbitMQ</RootNamespace>
+    <PackageId>Common.MessageBrokers.RabbitMQ</PackageId>
+    <Authors>Common.MessageBrokers.RabbitMQ</Authors>
+    <Product>Common.MessageBrokers.RabbitMQ</Product>
   </PropertyGroup>
+ 
 
 </Project>

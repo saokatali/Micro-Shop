@@ -1,0 +1,19 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <OutputType>Library</OutputType>
+    <PackageId>Common.Web.Middleware</PackageId>
+    <Authors>Common.Web.Middleware</Authors>
+    <Product>Common.Web.Middleware</Product>
+    <RootNamespace>Common.Web.Middleware</RootNamespace>
+    <Version>1.0.1</Version>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <FrameworkReference Include="Microsoft.AspNetCore.App" />
+  </ItemGroup>
+
+
+
+</Project>
