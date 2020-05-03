@@ -1,4 +1,5 @@
 using Catalog.API.Core;
+using Catalog.API.Infrastructure;
 using Common.Web.Middleware;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
@@ -27,6 +28,8 @@ namespace Catalog.API
             services.AddOptions();
 
             services.Configure<AppSettings>(Configuration);
+
+            services.AddDbContext<CatalogDbContext>();
 
             services.AddAuthentication(options =>
             {

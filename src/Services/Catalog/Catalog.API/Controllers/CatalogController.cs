@@ -1,9 +1,11 @@
 ﻿using Catalog.API.Core.Dto;
+using Catalog.API.Infrastructure;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Net;
 using System.Threading.Tasks;
+using System.Linq;
     
 namespace Catalog.API.Controllers
 {
@@ -12,6 +14,15 @@ namespace Catalog.API.Controllers
     // [Authorize]
     public class CatalogController : ControllerBase
     {
+
+        CatalogDbContext ctx;
+
+        public CatalogController(CatalogDbContext ctx)
+        {
+            this.ctx = ctx;
+            var p = ctx.Products.ToList();
+        }
+
         [HttpGet]
         [ProducesResponseType(typeof(IEnumerable<CatalogDto>), (int)HttpStatusCode.OK)]
         public async Task<IActionResult> GetAll()
