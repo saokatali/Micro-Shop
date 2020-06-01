@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Catalog.API.Migrations
 {
-    public partial class initial : Migration
+    public partial class Initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -14,6 +14,7 @@ namespace Catalog.API.Migrations
                     Id = table.Column<Guid>(nullable: false),
                     CreatedDate = table.Column<DateTime>(nullable: false),
                     UpdatedDate = table.Column<DateTime>(nullable: false),
+                    IsDeleted = table.Column<bool>(nullable: false),
                     Name = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
@@ -28,6 +29,7 @@ namespace Catalog.API.Migrations
                     Id = table.Column<Guid>(nullable: false),
                     CreatedDate = table.Column<DateTime>(nullable: false),
                     UpdatedDate = table.Column<DateTime>(nullable: false),
+                    IsDeleted = table.Column<bool>(nullable: false),
                     Name = table.Column<string>(nullable: true),
                     Description = table.Column<string>(nullable: true),
                     Vendor = table.Column<string>(nullable: true),
@@ -70,6 +72,7 @@ namespace Catalog.API.Migrations
                     Id = table.Column<Guid>(nullable: false),
                     CreatedDate = table.Column<DateTime>(nullable: false),
                     UpdatedDate = table.Column<DateTime>(nullable: false),
+                    IsDeleted = table.Column<bool>(nullable: false),
                     Reviewer = table.Column<Guid>(nullable: false),
                     ReviewerName = table.Column<string>(nullable: true),
                     Comment = table.Column<string>(nullable: true),

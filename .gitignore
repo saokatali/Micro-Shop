@@ -52,3 +52,5 @@
 /src/Services/Catalog/Catalog.UnitTests/obj
 /src/Services/Catalog/Catalog.UnitTests/bin
 /src/Services/Catalog/Catalog.API/*.user
+*.user
+/src/Services/Identity/Identity.API/*.user

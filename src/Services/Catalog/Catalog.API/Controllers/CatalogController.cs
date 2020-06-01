@@ -6,7 +6,8 @@ using System.Collections.Generic;
 using System.Net;
 using System.Threading.Tasks;
 using System.Linq;
-    
+using Microsoft.EntityFrameworkCore;
+
 namespace Catalog.API.Controllers
 {
     [Route("[controller]")]
@@ -20,16 +21,16 @@ namespace Catalog.API.Controllers
         public CatalogController(CatalogDbContext ctx)
         {
             this.ctx = ctx;
-            var p = ctx.Products.ToList();
+         
         }
 
         [HttpGet]
         [ProducesResponseType(typeof(IEnumerable<CatalogDto>), (int)HttpStatusCode.OK)]
         public async Task<IActionResult> GetAll()
         {
-            await Task.CompletedTask;
             
-            return Ok();
+            
+            return Ok(await ctx.Products.ToListAsync());
         }
 
         [HttpGet("{id}")]
