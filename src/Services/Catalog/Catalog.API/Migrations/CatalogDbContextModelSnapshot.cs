@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Catalog.API.Migrations
 {
-    [DbContext(typeof(CatalogDbContext))]
+    [DbContext(typeof(CatalogDataContext))]
     partial class CatalogDbContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)

@@ -1,6 +1,7 @@
 using Catalog.API.Core;
 using Catalog.API.Infrastructure;
 using Common.Web.Middleware;
+using MediatR;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -8,7 +9,9 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
+using Microsoft.OpenApi.Models;
 using System;
+using System.Reflection;
 using System.Text;
 
 namespace Catalog.API
@@ -29,7 +32,7 @@ namespace Catalog.API
 
             services.Configure<AppSettings>(Configuration);
 
-            services.AddDbContext<CatalogDbContext>();
+            services.AddDbContext<CatalogDataContext>();
 
             services.AddAuthentication(options =>
             {
@@ -51,8 +54,9 @@ namespace Catalog.API
 
                 };
             });
-
+            services.AddMediatR(Assembly.GetExecutingAssembly());
             services.AddControllers();
+            services.AddSwaggerGen(c => c.SwaggerDoc("v1", new OpenApiInfo { Title = "Catalog API", Version = "v1" }));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -60,7 +64,22 @@ namespace Catalog.API
         {
             app.UseException();
 
-            app.UseHttpsRedirection();
+            if (!env.IsDevelopment())
+            {
+                app.UseHsts();
+                app.UseHttpsRedirection();
+            }
+
+            app.UseStaticFiles();
+
+            app.UseSwagger();
+            app.UseSwaggerUI(c =>
+            {
+                c.RoutePrefix = string.Empty;
+                // string swaggerJsonBasePath = string.IsNullOrWhiteSpace(c.RoutePrefix) ? "." : "..";
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Catalog APICatalog API");
+
+            });
 
             app.UseRouting();
             app.UseAuthentication();

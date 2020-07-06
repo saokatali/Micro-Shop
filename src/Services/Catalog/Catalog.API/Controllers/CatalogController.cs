@@ -7,6 +7,9 @@ using System.Net;
 using System.Threading.Tasks;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
+using MediatR;
+using Catalog.API.Application.Messages.Commands.Catalog;
+using Catalog.API.Application.Messages.Queries.Catalog;
 
 namespace Catalog.API.Controllers
 {
@@ -15,22 +18,19 @@ namespace Catalog.API.Controllers
     // [Authorize]
     public class CatalogController : ControllerBase
     {
+        private readonly IMediator mediator;
 
-        CatalogDbContext ctx;
-
-        public CatalogController(CatalogDbContext ctx)
+        public CatalogController(IMediator mediator)
         {
-            this.ctx = ctx;
-         
+            this.mediator = mediator;
         }
 
         [HttpGet]
         [ProducesResponseType(typeof(IEnumerable<CatalogDto>), (int)HttpStatusCode.OK)]
         public async Task<IActionResult> GetAll()
         {
-            
-            
-            return Ok(await ctx.Products.ToListAsync());
+            var data = await mediator.Send(new All.Query());
+            return Ok(data);
         }
 
         [HttpGet("{id}")]
@@ -38,9 +38,9 @@ namespace Catalog.API.Controllers
         [ProducesResponseType((int)HttpStatusCode.NotFound)]
         public async Task<IActionResult> GetById(Guid id)
         {
-            await Task.CompletedTask;
+            var data = await mediator.Send(new ById.Query { Id=id });
 
-            return Ok();
+            return Ok(data);
         }
 
     }

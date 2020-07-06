@@ -11,7 +11,7 @@ using System.Reflection;
 
 namespace Catalog.API.Infrastructure
 {
-    public class CatalogDbContext : DbContext
+    public class CatalogDataContext : DbContext
     {
         #region Entities
         public DbSet<Product> Products { get; set; }
@@ -26,7 +26,7 @@ namespace Catalog.API.Infrastructure
 
         #region Configuration
         public AppSettings AppSettings { get; }
-        public CatalogDbContext(IOptionsSnapshot<AppSettings> appSettings)
+        public CatalogDataContext(IOptionsSnapshot<AppSettings> appSettings)
         {
             AppSettings = appSettings.Value;
         }
@@ -90,7 +90,7 @@ namespace Catalog.API.Infrastructure
             return base.SaveChangesAsync(cancellationToken);
         }
 
-        static readonly MethodInfo SetGlobalQueryMethod = typeof(CatalogDbContext).GetMethods(BindingFlags.Public | BindingFlags.Instance)
+        static readonly MethodInfo SetGlobalQueryMethod = typeof(CatalogDataContext).GetMethods(BindingFlags.Public | BindingFlags.Instance)
                                                         .Single(t => t.IsGenericMethod && t.Name == "SetGlobalQuery");
 
         public void SetGlobalQuery<T>(ModelBuilder builder) where T : BaseEntity
