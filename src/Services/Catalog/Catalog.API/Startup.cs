@@ -1,3 +1,4 @@
+using AutoMapper;
 using Catalog.API.Core;
 using Catalog.API.Infrastructure;
 using Common.Web.Middleware;
@@ -54,6 +55,7 @@ namespace Catalog.API
 
                 };
             });
+            services.AddAutoMapper(Assembly.GetExecutingAssembly());
             services.AddMediatR(Assembly.GetExecutingAssembly());
             services.AddControllers();
             services.AddSwaggerGen(c => c.SwaggerDoc("v1", new OpenApiInfo { Title = "Catalog API", Version = "v1" }));

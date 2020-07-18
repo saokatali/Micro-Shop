@@ -1,7 +1,6 @@
 ﻿using Catalog.API.Domain.Models.Entities;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 
@@ -9,7 +8,7 @@ namespace Catalog.API.Infrastructure.Repositories
 {
     interface IRepository
     {
-        public interface IRepository<T> where T: BaseEntity
+        public interface IRepository<T> where T : BaseEntity
         {
             Task<T> GetByIdAsync(Guid id);
             Task<IList<T>> GetAllAsync();

@@ -1,33 +1,35 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading;
-using System.Threading.Tasks;
-using Catalog.API.Domain.Models.Entities;
+﻿using AutoMapper;
+using Catalog.API.Core.Dto;
 using Catalog.API.Infrastructure;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace Catalog.API.Application.Messages.Commands.Catalog
 {
     public class All
     {
 
-        public class Query:IRequest<List<Product>>{}
+        public class Query : IRequest<List<ProductDto>> { }
 
-        public class Handler : IRequestHandler<Query, List<Product>>
+        public class Handler : IRequestHandler<Query, List<ProductDto>>
         {
             private readonly CatalogDataContext dataContext;
 
-            public Handler(CatalogDataContext dataContext)
+            private readonly IMapper mapper;
+
+            public Handler(CatalogDataContext dataContext, IMapper mapper)
             {
                 this.dataContext = dataContext;
+                this.mapper = mapper;
             }
 
-            public async Task<List<Product>> Handle(Query request, CancellationToken cancellationToken)
+            public async Task<List<ProductDto>> Handle(Query request, CancellationToken cancellationToken)
             {
                 var products = await dataContext.Products.ToListAsync();
-                return products;
+                return mapper.Map<List<ProductDto>>(products);
             }
         }
 

@@ -1,18 +1,11 @@
-﻿using System.Collections.Generic;
-
-namespace Catalog.API.Domain.Models.Entities
+﻿namespace Catalog.API.Core.Dto
 {
-    public class Product : BaseEntity
+    public class ProductDto
     {
         public string Name { get; set; }
         public string Description { get; set; }
         public string Vendor { get; set; }
         public decimal Price { get; set; }
         public int Quantity { get; set; }
-
-        public List<CategoryProduct> Categories { get; set; }
-
-        public List<Review> Reviews;
-
     }
 }

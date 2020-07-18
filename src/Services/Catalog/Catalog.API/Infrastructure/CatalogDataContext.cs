@@ -1,13 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore;
+﻿using Catalog.API.Core;
 using Catalog.API.Domain.Models.Entities;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
-using Catalog.API.Core;
-using System.Threading;
+using System;
+using System.Linq;
 using System.Reflection;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace Catalog.API.Infrastructure
 {
@@ -15,7 +14,7 @@ namespace Catalog.API.Infrastructure
     {
         #region Entities
         public DbSet<Product> Products { get; set; }
-        public DbSet<Category> Categories  { get; set; }
+        public DbSet<Category> Categories { get; set; }
         public DbSet<Review> Reviews { get; set; }
 
         #endregion
@@ -31,7 +30,7 @@ namespace Catalog.API.Infrastructure
             AppSettings = appSettings.Value;
         }
 
-    
+
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -60,7 +59,7 @@ namespace Catalog.API.Infrastructure
 
         }
 
-       
+
 
         public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
         {
@@ -95,7 +94,7 @@ namespace Catalog.API.Infrastructure
 
         public void SetGlobalQuery<T>(ModelBuilder builder) where T : BaseEntity
         {
-                       
+
             builder.Entity<T>().HasQueryFilter(e => !e.IsDeleted);
         }
 
