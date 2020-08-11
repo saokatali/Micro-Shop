@@ -9,6 +9,8 @@ namespace Catalog.API.Application
         public MappingProfile()
         {
             CreateMap<Product, ProductDto>();
+            CreateMap<Category, CategoryDto>();
+            
         }
     }
 }

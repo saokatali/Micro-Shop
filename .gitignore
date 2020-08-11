@@ -54,3 +54,5 @@
 /src/Services/Catalog/Catalog.API/*.user
 *.user
 /src/Services/Identity/Identity.API/*.user
+/src/Services/Catalog/bin
+/src/Services/Catalog/obj

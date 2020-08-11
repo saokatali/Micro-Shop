@@ -1,31 +1,43 @@
-﻿using Catalog.API.Domain.Models.Entities;
+﻿using AutoMapper;
+using Catalog.API.Core.Dto;
 using Catalog.API.Infrastructure;
 using MediatR;
 using System;
 using System.Threading;
 using System.Threading.Tasks;
+using Common.Web.Middleware;
+
 
 namespace Catalog.API.Application.Messages.Queries.Catalog
 {
     public class ById
     {
-        public class Query : IRequest<Product>
+        public class Query : IRequest<ProductDto>
         {
             public Guid Id { get; set; }
         }
 
-        public class Handler : IRequestHandler<Query, Product>
+        public class Handler : IRequestHandler<Query, ProductDto>
         {
             private readonly CatalogDataContext dataContext;
 
-            public Handler(CatalogDataContext dataContext)
+            private readonly IMapper mapper;
+
+            public Handler(CatalogDataContext dataContext, IMapper mapper)
             {
                 this.dataContext = dataContext;
+                this.mapper = mapper;
             }
 
-            public async Task<Product> Handle(Query request, CancellationToken cancellationToken)
+            public async Task<ProductDto> Handle(Query request, CancellationToken cancellationToken)
             {
-                return await dataContext.Products.FindAsync(request.Id);
+               var product =  await dataContext.Products.FindAsync(request.Id);
+                if(product == null)
+                {
+                    
+                    throw new NotFoundException($"The Product with id {request.Id} not found");
+                }
+                return mapper.Map<ProductDto>(product);
             }
         }
     }

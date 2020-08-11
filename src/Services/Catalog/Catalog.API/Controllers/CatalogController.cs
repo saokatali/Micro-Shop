@@ -1,4 +1,4 @@
-﻿using Catalog.API.Application.Messages.Commands.Catalog;
+﻿
 using Catalog.API.Application.Messages.Queries.Catalog;
 using Catalog.API.Core.Dto;
 using MediatR;
@@ -13,7 +13,7 @@ namespace Catalog.API.Controllers
     [Route("[controller]")]
     [ApiController]
     // [Authorize]
-    public class CatalogController : ControllerBase
+    public class CatalogController : BaseController
     {
         private readonly IMediator mediator;
 
@@ -39,6 +39,11 @@ namespace Catalog.API.Controllers
 
             return Ok(data);
         }
+
+        //public Task<IActionResult> Post()
+        //{
+
+        //}
 
     }
 }

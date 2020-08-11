@@ -35,7 +35,7 @@ namespace Catalog.API.Infrastructure
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             base.OnConfiguring(optionsBuilder);
-            optionsBuilder.UseSqlServer(AppSettings.SqlServer.ConnectionStrings);
+            optionsBuilder.UseSqlServer(AppSettings.SqlServer.ConnectionStrings);          
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

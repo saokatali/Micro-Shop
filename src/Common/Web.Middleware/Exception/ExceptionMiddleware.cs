@@ -39,20 +39,33 @@ namespace Common.Web.Middleware
         private Task HandleExceptionAsync(HttpContext context, Exception exception)
         {
             context.Response.ContentType = "application/json";
-            context.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
+            context.Response.StatusCode = GetStatusCode(exception);
 
             return context.Response.WriteAsync(new ErrorDetails()
             {
-                StatusCode = context.Response.StatusCode,
-                Message = env.IsDevelopment() ? exception.StackTrace : exception.Message
+
+                Message = exception.Message,
+                StackTrace = env.IsDevelopment() ? exception.StackTrace : string.Empty
             }.ToString());
+        }
+
+        private int GetStatusCode(Exception exception)
+        {
+            switch (exception.GetType().Name)
+            {
+                case nameof(NotFoundException):
+                    return 404;
+                default:
+                    return 500;
+
+            }
+
         }
 
         class ErrorDetails
         {
-            public int StatusCode { get; set; }
             public string Message { get; set; }
-
+            public string StackTrace { get; set; }
 
             public override string ToString()
             {
@@ -62,6 +75,6 @@ namespace Common.Web.Middleware
     }
 
 
-   
+
 
 }
