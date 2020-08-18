@@ -1,4 +1,5 @@
 ﻿
+using Catalog.API.Application.Messages.Commands.Catalog;
 using Catalog.API.Application.Messages.Queries.Catalog;
 using Catalog.API.Core.Dto;
 using MediatR;
@@ -40,10 +41,23 @@ namespace Catalog.API.Controllers
             return Ok(data);
         }
 
-        //public Task<IActionResult> Post()
-        //{
 
-        //}
+        [HttpGet("category/{id}")]
+        [ProducesResponseType(typeof(List<ProductDto>), (int)HttpStatusCode.OK)]
+        public async Task<IActionResult> GetByCategory(Guid id)
+        {
+            return Ok(await mediator.Send(new ByCategory.Query { CategoryId = id }));
+        }
+
+        [HttpPost]
+        [ProducesResponseType((int)HttpStatusCode.Created)]
+        public async Task<IActionResult> Create(ProductDto product)
+        {
+
+            await mediator.Send(new Create.Command { Product = product });
+            return Created();
+
+        }
 
     }
 }

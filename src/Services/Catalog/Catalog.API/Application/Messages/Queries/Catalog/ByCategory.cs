@@ -1,20 +1,23 @@
 ﻿using AutoMapper;
 using Catalog.API.Core.Dto;
-using Catalog.API.Domain.Models.Entities;
 using Catalog.API.Infrastructure;
+using Common.Web.Middleware;
 using MediatR;
-using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 
 namespace Catalog.API.Application.Messages.Queries.Catalog
 {
-    public class All
+    public class ByCategory
     {
-
-        public class Query : IRequest<List<ProductDto>> { }
+        public class Query : IRequest<List<ProductDto>>
+        {
+            public Guid CategoryId { get; set; }
+        }
 
         public class Handler : IRequestHandler<Query, List<ProductDto>>
         {
@@ -30,19 +33,18 @@ namespace Catalog.API.Application.Messages.Queries.Catalog
 
             public async Task<List<ProductDto>> Handle(Query request, CancellationToken cancellationToken)
             {
-                var products = await dataContext.Products.Include(e=>e.Categories).ToListAsync();
+                var category = await dataContext.Categories.Include(e=>e.Products).FirstOrDefaultAsync(e => e.Id == request.CategoryId);
 
-                var data = products.Select<Product,ProductDto>(p => {
-                    var productDto = mapper.Map<ProductDto>(p);
-                    productDto.CaregoryIds = p.Categories.Select(c => c.CategoryId).ToList();
-                    return productDto;
-                    }).ToList();
 
-              
-                return data;
+
+                if (category == null)
+                {
+
+                    throw new NotFoundException($"The Category with id {request.CategoryId} not found");
+                }
+                var products = category.Products.Select(e =>  e.Product);
+                return mapper.Map<List<ProductDto>>(products);
             }
         }
-
-
     }
 }

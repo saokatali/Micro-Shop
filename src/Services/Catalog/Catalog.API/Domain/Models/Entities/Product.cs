@@ -12,7 +12,7 @@ namespace Catalog.API.Domain.Models.Entities
 
         public List<CategoryProduct> Categories { get; set; }
 
-        public List<Review> Reviews;
+        public List<Review> Reviews { get; set; }
 
     }
 }

@@ -34,16 +34,10 @@ namespace Catalog.API.Application.Messages.Commands.Category
 
             public async Task<Unit> Handle(Command request, CancellationToken cancellationToken)
             {
-               // var category = mapper.Map<Category>(request.Category);
                 var category = new Domain.Models.Entities.Category { Name = request.Category.Name };
-                category.Id = new Guid();
-                category.CreatedDate = DateTime.UtcNow;
-                category.UpdatedDate = DateTime.UtcNow;
-                category.IsDeleted = false;
-
+                category.Id = request.Category.Id != null ? request.Category.Id : category.Id;
                 dataContext.Add(category);
                 await dataContext.SaveChangesAsync();
-
                 return new Unit();
 
                 

@@ -27,7 +27,18 @@ namespace Catalog.API.Controllers
             return Ok(await mediator.Send(new All.Query()));
         }
 
+        [HttpGet("{id}")]
+        [ProducesResponseType(typeof(CategoryDto), (int)HttpStatusCode.OK)]
+        [ProducesResponseType((int)HttpStatusCode.NotFound)]
+        public async Task<IActionResult> GetById(Guid id)
+        {
+            return Ok(await mediator.Send(new ById.Query { Id=id }));
+        }
+
+       
+
         [HttpPost]
+        [ProducesResponseType((int)HttpStatusCode.Created)]
         public async Task<IActionResult> Create(CategoryDto category)
         {
 
@@ -37,6 +48,8 @@ namespace Catalog.API.Controllers
         }
 
         [HttpPut]
+        [ProducesResponseType((int)HttpStatusCode.OK)]
+        [ProducesResponseType((int)HttpStatusCode.NotFound)]
         public async Task<IActionResult> Update(Guid id, CategoryDto category)
         {
 
@@ -45,6 +58,8 @@ namespace Catalog.API.Controllers
 
         }
         [HttpDelete]
+        [ProducesResponseType((int)HttpStatusCode.OK)]
+        [ProducesResponseType((int)HttpStatusCode.NotFound)]
         public async Task<IActionResult> Delete(Guid id)
         {
 
