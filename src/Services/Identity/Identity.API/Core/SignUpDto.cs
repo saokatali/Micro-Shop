@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Identity.API.Core
 {
-    public class SignUpModel
+    public class SignUpDto
     {
         [Required]
         public string Email { get; set; }

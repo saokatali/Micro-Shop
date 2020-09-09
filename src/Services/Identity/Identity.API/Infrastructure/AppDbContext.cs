@@ -8,7 +8,7 @@ namespace Identity.API.Infrastructure
 {
     public class AppDbContext:IdentityDbContext<AppUser,AppRole,Guid>
     {
-        AppSettings appSettings;
+        private readonly AppSettings appSettings;
         public AppDbContext(IOptionsSnapshot<AppSettings> appSettings)
         {
             this.appSettings = appSettings.Value;

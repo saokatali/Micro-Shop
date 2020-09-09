@@ -24,12 +24,11 @@ namespace Catalog.API.Application.Messages.Commands.Category
         {
             private readonly CatalogDataContext dataContext;
 
-            private readonly IMapper mapper;
 
-            public Handler(CatalogDataContext dataContext, IMapper mapper)
+
+            public Handler(CatalogDataContext dataContext)
             {
                 this.dataContext = dataContext;
-                this.mapper = mapper;
             }
 
             public async Task<Unit> Handle(Command request, CancellationToken cancellationToken)

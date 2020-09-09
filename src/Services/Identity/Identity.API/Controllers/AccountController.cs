@@ -18,9 +18,9 @@ namespace Identity.API.Controllers
     [ApiController]
     public class AccountController : ControllerBase
     {
-        UserManager<AppUser> userManager;
-        SignInManager<AppUser> signInManager;
-        AppSettings appSettings;
+        private readonly UserManager<AppUser> userManager;
+        private readonly SignInManager<AppUser> signInManager;
+        private readonly AppSettings appSettings;
         public AccountController(UserManager<AppUser> userManager, SignInManager<AppUser> signInManager, IOptionsSnapshot<AppSettings> appSettings)
         {
             this.userManager = userManager;
@@ -30,65 +30,53 @@ namespace Identity.API.Controllers
 
 
         [HttpPost("SignIn")]
-        public async Task<IActionResult> SignIn(SignInModel user)
+        public async Task<IActionResult> SignIn(SignInDto data)
         {
-            if (ModelState.IsValid)
-            {
+           
 
-                var result = await signInManager.PasswordSignInAsync(user.Email, user.Password, false, false);
+                var result = await signInManager.PasswordSignInAsync(data.Email, data.Password, false, false);
                 if (result.Succeeded)
                 {
-                    var appUser = userManager.Users.SingleOrDefault(r => r.Email == user.Email);
-                    var token = GenerateJwtToken(user.Email, appUser);
+                    var user = userManager.Users.SingleOrDefault(r => r.Email == data.Email);
+                    var token = GenerateJwtToken(user);
                     return Ok(new { Token = token });
                 }
                 else
                 {
                     return Unauthorized();
                 }
-
-
-            }
-            else
-            {
-                return BadRequest();
-            }
-
+           
         }
 
         [HttpPost("SignUp")]
-        public async Task<IActionResult> SignUp(SignUpModel model)
+        public async Task<IActionResult> SignUp(SignUpDto data)
         {
-            if (ModelState.IsValid)
-            {
+           
                 var user = new AppUser
                 {
-                    UserName = model.Email,
-                    Email = model.Email
+                    UserName = data.Email,
+                    Email = data.Email
                 };
-                var result = await userManager.CreateAsync(user, model.Password);
+                var result = await userManager.CreateAsync(user, data.Password);
 
                 if (result.Succeeded)
                 {
                     await signInManager.SignInAsync(user, false);
-                    var token = GenerateJwtToken(user.Email, user);
+                    var token = GenerateJwtToken(user);
                     return Ok(new { Token = token });
                 }
-            }
-
-
+            
             return BadRequest();
 
         }
 
-        private string GenerateJwtToken(string email, AppUser user)
+        private string GenerateJwtToken(AppUser user)
         {
             var claims = new List<Claim>
             {
-                new Claim(JwtRegisteredClaimNames.Email, email),
-                new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
+                new Claim(JwtRegisteredClaimNames.NameId, user.UserName),
+                new Claim(JwtRegisteredClaimNames.Email, user.Email),
                 new Claim("userId", user.Id.ToString()),
-                new Claim(JwtRegisteredClaimNames.UniqueName, email)
 
             };
 

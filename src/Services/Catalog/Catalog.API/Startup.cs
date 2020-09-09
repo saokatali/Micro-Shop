@@ -6,12 +6,15 @@ using MediatR;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Mvc.Authorization;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using System;
+using System.Net;
 using System.Reflection;
 using System.Text;
 
@@ -33,7 +36,12 @@ namespace Catalog.API
 
             services.Configure<AppSettings>(Configuration);
 
-            services.AddDbContext<CatalogDataContext>();
+            services.AddDbContext<CatalogDataContext>(
+                opttions => {
+                    //For Lazy loading
+                    opttions.UseLazyLoadingProxies();
+                }
+                );
 
             services.AddAuthentication(options =>
             {
@@ -57,7 +65,9 @@ namespace Catalog.API
             });
             services.AddAutoMapper(Assembly.GetExecutingAssembly());
             services.AddMediatR(Assembly.GetExecutingAssembly());
-            services.AddControllers();
+            services.AddControllers(options=> {
+               // options.Filters.Add(new AuthorizeFilter());
+            } );
             services.AddSwaggerGen(c => c.SwaggerDoc("v1", new OpenApiInfo { Title = "Catalog API", Version = "v1" }));
         }
 

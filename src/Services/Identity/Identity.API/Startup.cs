@@ -27,32 +27,6 @@ namespace Identity.API
             services.Configure<AppSettings>(Configuration);
             services.AddDbContext<AppDbContext>(ServiceLifetime.Scoped);
             services.AddIdentity<AppUser, AppRole>().AddEntityFrameworkStores<AppDbContext>();
-
-            //services.AddAuthentication(options =>
-            //{
-            //    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-            //    options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
-            //    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-
-            //}).AddJwtBearer(options =>
-            //{
-            //    options.RequireHttpsMetadata = true;
-            //    options.SaveToken = true;
-            //    options.TokenValidationParameters = new TokenValidationParameters
-            //    {
-            //        ValidateLifetime = true,
-            //        ValidateIssuerSigningKey = true,
-            //        ValidateIssuer = false,
-            //        ValidateAudience = false,
-            //        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["JWT:SecretKey"])),
-            //        ClockSkew = TimeSpan.Zero
-
-            //    };
-
-            //});
-
-
-
             services.AddControllers();
         }
 
@@ -66,9 +40,6 @@ namespace Identity.API
 
             app.UseRouting();
 
-           
-            app.UseAuthentication();
-            app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {

@@ -1,6 +1,4 @@
-﻿using AutoMapper;
-using Catalog.API.Core.Dto;
-using Catalog.API.Infrastructure;
+﻿using Catalog.API.Infrastructure;
 using Common.Web.Middleware;
 using MediatR;
 using System;
@@ -9,13 +7,13 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Catalog.API.Application.Messages.Commands.Category
+namespace Catalog.API.Application.Messages.Commands.Catalog
 {
-    public class Update
+    public class Delete
     {
         public class Command : IRequest
         {
-            public CategoryDto Category { get; set; }
+
             public Guid Id { get; set; }
 
         }
@@ -24,7 +22,7 @@ namespace Catalog.API.Application.Messages.Commands.Category
         {
             private readonly CatalogDataContext dataContext;
 
-        
+
 
             public Handler(CatalogDataContext dataContext)
             {
@@ -35,16 +33,16 @@ namespace Catalog.API.Application.Messages.Commands.Category
             public async Task<Unit> Handle(Command request, CancellationToken cancellationToken)
             {
                 // var category = mapper.Map<Category>(request.Category);
-                var category = dataContext.Categories.Find(request.Id);
+                var product = dataContext.Products.Find(request.Id);
 
-                if (category == null)
+                if (product == null)
                 {
 
-                    throw new NotFoundException($"The category with id {request.Id} not found");
+                    throw new NotFoundException($"The product with id {request.Id} not found");
                 }
 
-                category.UpdatedDate = DateTime.UtcNow;
-                category.Name = request.Category.Name;             
+                product.UpdatedDate = DateTime.UtcNow;
+                product.IsDeleted = true;
                 await dataContext.SaveChangesAsync();
 
                 return new Unit();
@@ -52,6 +50,5 @@ namespace Catalog.API.Application.Messages.Commands.Category
 
             }
         }
-
     }
 }
