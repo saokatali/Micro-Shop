@@ -32,7 +32,7 @@ namespace Catalog.API.Application.Messages.Queries.Catalog
             {
                 var products = await dataContext.Products.Include(e=>e.Categories).ToListAsync();
 
-                var data = products.Select<Product,ProductDto>(p => {
+                var data = products.Select(p => {
                     var productDto = mapper.Map<ProductDto>(p);
                     productDto.CaregoryIds = p.Categories.Select(c => c.CategoryId).ToList();
                     return productDto;

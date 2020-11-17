@@ -17,6 +17,7 @@ using System;
 using System.Net;
 using System.Reflection;
 using System.Text;
+using Microsoft.AspNetCore.Cors.Infrastructure;
 
 namespace Catalog.API
 {
@@ -42,6 +43,18 @@ namespace Catalog.API
                     opttions.UseLazyLoadingProxies();
                 }
                 );
+         
+            services.AddAutoMapper(Assembly.GetExecutingAssembly());
+            services.AddMediatR(Assembly.GetExecutingAssembly());
+
+
+            services.AddCors(options =>
+            {
+                options.AddPolicy("DefaultPolicy", policy =>
+                {
+                    policy.AllowAnyHeader().AllowAnyMethod().AllowCredentials().AllowAnyOrigin();
+                });
+            });
 
             services.AddAuthentication(options =>
             {
@@ -63,8 +76,6 @@ namespace Catalog.API
 
                 };
             });
-            services.AddAutoMapper(Assembly.GetExecutingAssembly());
-            services.AddMediatR(Assembly.GetExecutingAssembly());
             services.AddControllers(options=> {
                // options.Filters.Add(new AuthorizeFilter());
             } );

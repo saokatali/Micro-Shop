@@ -56,3 +56,10 @@
 /src/Services/Identity/Identity.API/*.user
 /src/Services/Catalog/bin
 /src/Services/Catalog/obj
+/src/UI/Mobile/MicroShopMobile/MicroShopMobile/MicroShopMobile/obj
+/src/UI/Mobile/MicroShopMobile/MicroShopMobile/MicroShopMobile/bin
+/src/UI/Mobile/MicroShopMobile/MicroShopMobile/MicroShopMobile.Android/obj
+/src/UI/Mobile/MicroShopMobile/MicroShopMobile/MicroShopMobile.Android/bin
+/src/UI/Mobile/MicroShopMobile/MicroShopMobile/MicroShopMobile.iOS/obj
+/src/UI/Mobile/MicroShopMobile/MicroShopMobile/MicroShopMobile.iOS/bin
+/src/UI/Mobile/MicroShopMobile/.vs

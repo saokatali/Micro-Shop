@@ -1,0 +1,10 @@
+D:\Practice\Dotnet\Micro-Shop\src\Services\Basket\Basket.API\bin\Debug\netcoreapp3.1\appsettings.Development.json
+D:\Practice\Dotnet\Micro-Shop\src\Services\Basket\Basket.API\bin\Debug\netcoreapp3.1\appsettings.json
+D:\Practice\Dotnet\Micro-Shop\src\Services\Basket\Basket.API\bin\Debug\netcoreapp3.1\Properties\launchSettings.json
+D:\Practice\Dotnet\Micro-Shop\src\Services\Basket\Basket.API\bin\Debug\netcoreapp3.1\Basket.API.exe
+D:\Practice\Dotnet\Micro-Shop\src\Services\Basket\Basket.API\obj\Debug\netcoreapp3.1\Basket.API.csprojAssemblyReference.cache
+D:\Practice\Dotnet\Micro-Shop\src\Services\Basket\Basket.API\obj\Debug\netcoreapp3.1\Basket.API.AssemblyInfoInputs.cache
+D:\Practice\Dotnet\Micro-Shop\src\Services\Basket\Basket.API\obj\Debug\netcoreapp3.1\Basket.API.AssemblyInfo.cs
+D:\Practice\Dotnet\Micro-Shop\src\Services\Basket\Basket.API\obj\Debug\netcoreapp3.1\Basket.API.RazorTargetAssemblyInfo.cache
+D:\Practice\Dotnet\Micro-Shop\src\Services\Basket\Basket.API\obj\Debug\netcoreapp3.1\staticwebassets\Basket.API.StaticWebAssets.Manifest.cache
+D:\Practice\Dotnet\Micro-Shop\src\Services\Basket\Basket.API\obj\Debug\netcoreapp3.1\staticwebassets\Basket.API.StaticWebAssets.xml
