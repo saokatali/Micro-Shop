@@ -63,3 +63,8 @@
 /src/UI/Mobile/MicroShopMobile/MicroShopMobile/MicroShopMobile.iOS/obj
 /src/UI/Mobile/MicroShopMobile/MicroShopMobile/MicroShopMobile.iOS/bin
 /src/UI/Mobile/MicroShopMobile/.vs
+/src/Services/Basket/Basket.API/bin
+/src/Services/Basket/Basket.API/obj
+/src/Services/Basket/.vs
+/src/Services/Basket/Basket.UnitTests/obj
+/src/Services/Basket/Basket.UnitTests/bin

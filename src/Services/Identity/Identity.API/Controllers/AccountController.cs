@@ -54,8 +54,10 @@ namespace Identity.API.Controllers
            
                 var user = new AppUser
                 {
-                    UserName = data.Email,
-                    Email = data.Email
+                    UserName = data.UserName,
+                    Email = data.Email,
+                    PhoneNumber = data.PhoneNumber
+                    
                 };
                 var result = await userManager.CreateAsync(user, data.Password);
 

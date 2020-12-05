@@ -46,12 +46,17 @@ namespace Catalog.API.Application.Messages.Commands.Catalog
                 }
             
                 dataContext.Add(product);
-                await dataContext.SaveChangesAsync();
+                var success = await dataContext.SaveChangesAsync() > 0;
+                if (success)
+                {
+                    return Unit.Value;
+                }
 
-                return new Unit();
-
+                throw new Exception("Problem saving data");
 
             }
         }
+
+
     }
 }

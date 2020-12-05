@@ -55,6 +55,8 @@ namespace Common.Web.Middleware
             {
                 case nameof(NotFoundException):
                     return 404;
+                case nameof(AccessDeniedException):
+                    return 401;
                 default:
                     return 500;
 

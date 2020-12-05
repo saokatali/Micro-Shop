@@ -10,6 +10,9 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using MediatR;
+using System.Reflection;
+using Basket.API.Infrastructure;
 
 namespace Basket.API
 {
@@ -29,6 +32,10 @@ namespace Basket.API
                 options.Configuration = Configuration["Redis:Configuration"];
                 options.InstanceName = Configuration["Redis:InstanceName"];
             });
+
+            services.AddSingleton<ICacheContext, CacheContext>();
+
+            services.AddMediatR(Assembly.GetExecutingAssembly());
             services.AddControllers();
         }
 
