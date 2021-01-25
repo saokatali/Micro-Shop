@@ -20,6 +20,7 @@ using System.Text;
 using Microsoft.AspNetCore.Cors.Infrastructure;
 using FluentValidation.AspNetCore;
 using FluentValidation;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Catalog.API
 {
@@ -80,7 +81,8 @@ namespace Catalog.API
             });
           
             services.AddControllers(options=> {
-               // options.Filters.Add(new AuthorizeFilter());
+                //var authPolicy = new AuthorizationPolicyBuilder().RequireAuthenticatedUser().Build();
+                //options.Filters.Add(new AuthorizeFilter(authPolicy));
             } ).AddFluentValidation(cfg=> { cfg.RegisterValidatorsFromAssembly(Assembly.GetExecutingAssembly()); });
             services.AddSwaggerGen(c => c.SwaggerDoc("v1", new OpenApiInfo { Title = "Catalog API", Version = "v1" }));
         }

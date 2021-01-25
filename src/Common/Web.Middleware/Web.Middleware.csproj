@@ -1,13 +1,13 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <TargetFramework>net5.0</TargetFramework>
     <OutputType>Library</OutputType>
     <PackageId>Common.Web.Middleware</PackageId>
     <Authors>Common.Web.Middleware</Authors>
     <Product>Common.Web.Middleware</Product>
     <RootNamespace>Common.Web.Middleware</RootNamespace>
-    <Version>1.0.2</Version>
+    <Version>1.0.5</Version>
     <AssemblyVersion>1.0.2.0</AssemblyVersion>
     <FileVersion>1.0.2.0</FileVersion>
   </PropertyGroup>

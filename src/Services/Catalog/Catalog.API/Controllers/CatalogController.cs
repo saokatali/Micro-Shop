@@ -12,23 +12,16 @@ using System.Threading.Tasks;
 
 namespace Catalog.API.Controllers
 {
-    [Route("[controller]")]
-    [ApiController]
+  
     public class CatalogController : BaseController
     {
-        private readonly IMediator mediator;
-
-        public CatalogController(IMediator mediator)
-        {
-            this.mediator = mediator;
-        }
 
         [HttpGet]
         [AllowAnonymous]
         [ProducesResponseType(typeof(IEnumerable<ProductDto>), (int)HttpStatusCode.OK)]
         public async Task<IActionResult> GetAll()
         {
-            var data = await mediator.Send(new All.Query());
+            var data = await Mediator.Send(new All.Query());
             return Ok(data);
         }
 
@@ -38,7 +31,7 @@ namespace Catalog.API.Controllers
         [ProducesResponseType((int)HttpStatusCode.NotFound)]
         public async Task<IActionResult> GetById(Guid id)
         {
-            var data = await mediator.Send(new ById.Query { Id = id });
+            var data = await Mediator.Send(new ById.Query { Id = id });
 
             return Ok(data);
         }
@@ -49,7 +42,7 @@ namespace Catalog.API.Controllers
         [ProducesResponseType(typeof(List<ProductDto>), (int)HttpStatusCode.OK)]
         public async Task<IActionResult> GetByCategory(Guid id)
         {
-            return Ok(await mediator.Send(new ByCategory.Query { CategoryId = id }));
+            return Ok(await Mediator.Send(new ByCategory.Query { CategoryId = id }));
         }
 
         [HttpPost]
@@ -57,7 +50,7 @@ namespace Catalog.API.Controllers
         public async Task<IActionResult> Create(ProductDto product)
         {
 
-            await mediator.Send(new Create.Command { Product = product });
+            await Mediator.Send(new Create.Command { Product = product });
             return Created();
 
         }
@@ -68,7 +61,7 @@ namespace Catalog.API.Controllers
         public async Task<IActionResult> Update(ProductDto product, Guid id)
         {
 
-            await mediator.Send(new Update.Command { Product = product, Id=id });
+            await Mediator.Send(new Update.Command { Product = product, Id=id });
             return Ok();
 
         }
@@ -80,7 +73,7 @@ namespace Catalog.API.Controllers
         public async Task<IActionResult> Delete(Guid id)
         {
 
-            await mediator.Send(new Delete.Command { Id = id });
+            await Mediator.Send(new Delete.Command { Id = id });
             return Ok();
 
         }
