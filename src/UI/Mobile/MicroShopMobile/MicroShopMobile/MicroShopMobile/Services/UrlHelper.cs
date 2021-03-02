@@ -10,13 +10,42 @@ namespace MicroShopMobile.Services
     {
         public static string Get<T>()
         {
-            var app = Application.Current as App;
-            var baseUrl = app.Settings.ApiUrl;
+           
 
             switch (typeof(T).Name)
             {
                 case "SignInDto":
-                    return baseUrl + "";
+                    return  "";
+
+                default:
+                    return string.Empty;
+            }
+
+        }
+
+        public static string GetAll<T>()
+        {
+
+
+            switch (typeof(T).Name)
+            {
+                case "SignInDto":
+                    return "";
+
+                default:
+                    return string.Empty;
+            }
+
+        }
+
+        public static string Post<T>()
+        {
+
+
+            switch (typeof(T).Name)
+            {
+                case "Product":
+                    return "Catalog";
 
                 default:
                     return string.Empty;

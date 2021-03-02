@@ -5,6 +5,7 @@ using System.Reflection;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using System.Text.Json;
+using Xamarin.Essentials;
 
 namespace MicroShopMobile
 {
@@ -14,8 +15,14 @@ namespace MicroShopMobile
         {
             InitializeComponent();
             LoadAppSettings();
-
-            MainPage = new NavigationPage( new  Dashboard());
+            if (string.IsNullOrEmpty(Preferences.Get("token", string.Empty)))
+            {
+                MainPage = new NavigationPage(new Login());
+            }
+            else
+            {
+                MainPage = new NavigationPage(new Dashboard());
+            }
         }
 
         public AppSettings Settings { get; private set; }

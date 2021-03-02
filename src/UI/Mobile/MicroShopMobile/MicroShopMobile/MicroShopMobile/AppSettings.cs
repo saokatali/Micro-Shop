@@ -9,5 +9,6 @@ namespace MicroShopMobile
     public class AppSettings
     {
         public string ApiUrl { get; set; } = string.Empty;
+        public string IdentityUrl { get; set; } = string.Empty;
     }
 }

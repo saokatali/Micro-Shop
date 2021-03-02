@@ -34,10 +34,10 @@ namespace Identity.API.Controllers
         {
            
 
-                var result = await signInManager.PasswordSignInAsync(data.Email, data.Password, false, false);
+                var result = await signInManager.PasswordSignInAsync(data.UserName, data.Password, false, false);
                 if (result.Succeeded)
                 {
-                    var user = userManager.Users.SingleOrDefault(r => r.Email == data.Email);
+                    var user = userManager.Users.SingleOrDefault(r => r.UserName == data.UserName);
                     var token = GenerateJwtToken(user);
                     return Ok(new { Token = token });
                 }
@@ -68,7 +68,7 @@ namespace Identity.API.Controllers
                     return Ok(new { Token = token });
                 }
             
-            return BadRequest();
+            return BadRequest(result.Errors.Select(e=>e.Description));
 
         }
 

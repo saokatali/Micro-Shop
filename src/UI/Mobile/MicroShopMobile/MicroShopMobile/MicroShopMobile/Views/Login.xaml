@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MicroShopMobile.Views.Login">
+    <ContentPage.Content>
+        <StackLayout>
+            <Label Text="Login"></Label>
+            
+            <Entry Placeholder="User Name" Text="{Binding UserName}" />
+            <Entry IsPassword="True" Placeholder="Password" Text="{Binding Password}" />
+            <Button Text="Login" Clicked="SignIn" />
+            <StackLayout Orientation="Horizontal">
+                <Label Text="Do not have account ?" />
+                <Button Text="Sign Up" Clicked="SignUp" />
+            </StackLayout>
+          
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

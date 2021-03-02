@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MicroShopMobile.Views.SignUp">
+    <ContentPage.Content>
+        <StackLayout>
+
+            <Entry  Placeholder="Name"  ClearButtonVisibility="WhileEditing" Text="{Binding UserName}" />
+            <Entry  Placeholder="Email"  ClearButtonVisibility="WhileEditing" Keyboard="Email" Text="{Binding Email}" />
+            <Entry IsPassword="True" Placeholder="Password" ClearButtonVisibility="WhileEditing" Text="{Binding Password}" />
+            <Entry  Placeholder="Phone" Grid.Row="4" ClearButtonVisibility="WhileEditing" ReturnType="Go" Keyboard="Telephone" Text="{Binding PhoneNumber}" />
+            <Button Text="Save"  Clicked="Save" ></Button>
+
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
