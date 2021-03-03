@@ -68,3 +68,6 @@
 /src/Services/Basket/.vs
 /src/Services/Basket/Basket.UnitTests/obj
 /src/Services/Basket/Basket.UnitTests/bin
+/src/ApiGateways/GenericApiGateway/obj
+/src/ApiGateways/GenericApiGateway/bin
+/src/ApiGateways/GenericApiGateway/.vs
