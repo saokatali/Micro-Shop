@@ -16,6 +16,8 @@ namespace MicroShopMobile.Services
             {
                 case "SignInDto":
                     return  "";
+                case "Product":
+                    return "/catalog-api/Catalog";
 
                 default:
                     return string.Empty;
@@ -31,6 +33,8 @@ namespace MicroShopMobile.Services
             {
                 case "SignInDto":
                     return "";
+                case "Product":
+                    return "/catalog-api/Catalog";
 
                 default:
                     return string.Empty;

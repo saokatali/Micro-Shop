@@ -15,6 +15,7 @@ namespace MicroShopMobile
         {
             InitializeComponent();
             LoadAppSettings();
+            Container.RegisterServices();
             if (string.IsNullOrEmpty(Preferences.Get("token", string.Empty)))
             {
                 MainPage = new NavigationPage(new Login());

@@ -83,7 +83,7 @@ namespace Catalog.API
             services.AddControllers(options=> {
                 //var authPolicy = new AuthorizationPolicyBuilder().RequireAuthenticatedUser().Build();
                 //options.Filters.Add(new AuthorizeFilter(authPolicy));
-            } ).AddFluentValidation(cfg=> { cfg.RegisterValidatorsFromAssembly(Assembly.GetExecutingAssembly()); });
+            }).AddFluentValidation(cfg => cfg.RegisterValidatorsFromAssembly(Assembly.GetExecutingAssembly()));
             services.AddSwaggerGen(c => c.SwaggerDoc("v1", new OpenApiInfo { Title = "Catalog API", Version = "v1" }));
         }
 
