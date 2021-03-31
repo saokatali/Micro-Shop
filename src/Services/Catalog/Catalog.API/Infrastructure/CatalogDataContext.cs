@@ -57,6 +57,7 @@ namespace Catalog.API.Infrastructure
 
             }
 
+
         }
 
 
@@ -67,7 +68,7 @@ namespace Catalog.API.Infrastructure
 
             foreach (var entry in ChangeTracker.Entries())
             {
-                if (entry.State == EntityState.Added || entry.State == EntityState.Deleted || entry.State == EntityState.Deleted)
+                if (entry.State == EntityState.Added || entry.State == EntityState.Modified || entry.State == EntityState.Deleted)
                 {
                     var entity = entry.Entity as BaseEntity;
                     if (entity != null)

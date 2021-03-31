@@ -37,7 +37,7 @@ namespace Catalog.API.Application.Messages.Commands.Catalog
                 var newProduct = request.Product;
                 var product = new Product { Name = newProduct.Name, Description = newProduct.Description, Price = newProduct.Price, Quantity = newProduct.Quantity, Vendor = newProduct.Vendor };
 
-                product.Id = newProduct.Id != null ? newProduct.Id : product.Id;
+                product.Id = newProduct.Id != default ? newProduct.Id : product.Id;
                 product.Categories = new List<CategoryProduct>();
                 foreach (var categoryId in newProduct.CaregoryIds)
                 {

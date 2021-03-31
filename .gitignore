@@ -71,3 +71,11 @@
 /src/ApiGateways/GenericApiGateway/obj
 /src/ApiGateways/GenericApiGateway/bin
 /src/ApiGateways/GenericApiGateway/.vs
+/src/Common/MessageBrokers/.vs
+/src/Common/MessageBrokers/bin
+/src/Common/MessageBrokers/obj
+/src/Services/Notifications/.vs
+/src/Services/Notifications/Notifications.API/bin
+/src/Services/Notifications/Notifications.API/obj
+/src/Services/Notifications/Notifications.UnitTests/obj
+/src/Services/Notifications/Notifications.UnitTests/bin

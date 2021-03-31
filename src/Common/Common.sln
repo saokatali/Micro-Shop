@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29613.14
 MinimumVisualStudioVersion = 15.0.26124.0
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MessageBrokers.RabbitMQ", "MessageBrokers.RabbitMQ\MessageBrokers.RabbitMQ.csproj", "{A417AA1F-E172-4CA4-A535-FBCD4FAF7732}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MessageBrokers", "MessageBrokers\MessageBrokers.csproj", "{A417AA1F-E172-4CA4-A535-FBCD4FAF7732}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Web.Middleware", "Web.Middleware\Web.Middleware.csproj", "{58C24D95-FFF6-45B5-BF5B-9B0CC58A70D8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Web.Middleware", "Web.Middleware\Web.Middleware.csproj", "{58C24D95-FFF6-45B5-BF5B-9B0CC58A70D8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
