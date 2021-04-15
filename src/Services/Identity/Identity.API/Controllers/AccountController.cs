@@ -76,9 +76,8 @@ namespace Identity.API.Controllers
         {
             var claims = new List<Claim>
             {
-                new Claim(JwtRegisteredClaimNames.NameId, user.UserName),
-                new Claim(JwtRegisteredClaimNames.Email, user.Email),
-                new Claim("userId", user.Id.ToString()),
+                new Claim("userName", user.UserName),
+                new Claim("userId", user.Id.ToString())
 
             };
 

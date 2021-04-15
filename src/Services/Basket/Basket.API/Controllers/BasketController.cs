@@ -24,6 +24,7 @@ namespace Basket.API.Controllers
         [HttpPost]
         public async Task<ActionResult<Unit>> Post(BasketItem item)
         {
+            
             return await mediator.Send(new Add.Command { Item = item });
 
         }
@@ -35,7 +36,7 @@ namespace Basket.API.Controllers
 
         }
 
-        [HttpDelete]
+        [HttpGet]
         public async Task<ActionResult<Domain.Basket>> Get()
         {
             return await mediator.Send(new Get.Query());

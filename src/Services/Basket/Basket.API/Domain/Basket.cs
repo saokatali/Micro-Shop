@@ -7,7 +7,9 @@ namespace Basket.API.Domain
 {
     public class Basket
     {
-        public List<BasketItem> Items { get; set; } 
+        public List<BasketItem> Items { get; set; } = new List<BasketItem>();
+
+
 
         public decimal Price
         {

@@ -13,6 +13,8 @@ using Microsoft.Extensions.Logging;
 using MediatR;
 using System.Reflection;
 using Basket.API.Infrastructure;
+using Microsoft.OpenApi.Models;
+using Common.Web.Middleware;
 
 namespace Basket.API
 {
@@ -32,22 +34,35 @@ namespace Basket.API
                 options.Configuration = Configuration["Redis:Configuration"];
                 options.InstanceName = Configuration["Redis:InstanceName"];
             });
-
+            services.AddHttpContextAccessor();
             services.AddSingleton<ICacheContext, CacheContext>();
 
             services.AddMediatR(Assembly.GetExecutingAssembly());
             services.AddControllers();
+            services.AddSwaggerGen(c => c.SwaggerDoc("v1", new OpenApiInfo { Title = "Basket API", Version = "v1" }));
+          
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            if (env.IsDevelopment())
+            app.UseException();
+            if (!env.IsDevelopment())
             {
-                app.UseDeveloperExceptionPage();
+                app.UseHsts();
+                app.UseHttpsRedirection();
             }
 
-            app.UseHttpsRedirection();
+
+
+            app.UseSwagger();
+            app.UseSwaggerUI(c =>
+            {
+                c.RoutePrefix = string.Empty;
+                // string swaggerJsonBasePath = string.IsNullOrWhiteSpace(c.RoutePrefix) ? "." : "..";
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Catalog APICatalog API");
+
+            });
 
             app.UseRouting();
 

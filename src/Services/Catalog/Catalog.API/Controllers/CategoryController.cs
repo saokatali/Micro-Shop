@@ -2,6 +2,7 @@
 using Catalog.API.Application.Messages.Queries.Category;
 using Catalog.API.Core.Dto;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -12,6 +13,7 @@ namespace Catalog.API.Controllers
 {
     [Route("[controller]")]
     [ApiController]
+    [Authorize]
     public class CategoryController : BaseController
     {
         private readonly IMediator mediator;
@@ -24,6 +26,11 @@ namespace Catalog.API.Controllers
         [ProducesResponseType(typeof(List<CategoryDto>), (int)HttpStatusCode.OK)]
         public async Task<IActionResult> GetAll()
         {
+            foreach(var claim in User.Claims)
+            {
+                Console.WriteLine(claim.Type);
+                Console.WriteLine(claim.Value);
+            }
             return Ok(await mediator.Send(new All.Query()));
         }
 
