@@ -79,3 +79,8 @@
 /src/Services/Notifications/Notifications.API/obj
 /src/Services/Notifications/Notifications.UnitTests/obj
 /src/Services/Notifications/Notifications.UnitTests/bin
+/src/Services/Ordering/.vs
+/src/Services/Ordering/Ordering.API/bin
+/src/Services/Ordering/Ordering.API/obj
+/src/Services/Ordering/Ordering.UnitTests/bin
+/src/Services/Ordering/Ordering.UnitTests/obj

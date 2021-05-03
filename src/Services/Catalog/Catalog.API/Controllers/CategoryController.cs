@@ -1,6 +1,6 @@
 ﻿using Catalog.API.Application.Messages.Commands.Category;
 using Catalog.API.Application.Messages.Queries.Category;
-using Catalog.API.Core.Dto;
+using Catalog.API.Common.Dto;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;

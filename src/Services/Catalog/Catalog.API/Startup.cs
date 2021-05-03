@@ -2,7 +2,7 @@ using System;
 using System.Reflection;
 using System.Text;
 using AutoMapper;
-using Catalog.API.Core;
+using Catalog.API.Common;
 using Catalog.API.Infrastructure;
 using Common.Web.Middleware;
 using FluentValidation.AspNetCore;
@@ -74,7 +74,22 @@ namespace Catalog.API
 
                 };
             });
-          
+
+            services.AddAuthorization( options=> 
+            {
+                options.AddPolicy("IsAdmin", policy =>
+                {
+                    policy.RequireClaim("Role", "Admin");
+                    
+                });
+
+                options.AddPolicy("AtLeast18", policy =>
+                {
+                    policy.RequireClaim("Role", "Admin");
+
+                });
+            });
+            
             services.AddControllers(options=> {
                 //var authPolicy = new AuthorizationPolicyBuilder().RequireAuthenticatedUser().Build();
                 //options.Filters.Add(new AuthorizeFilter(authPolicy));

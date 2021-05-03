@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using Catalog.API.Core.Dto;
+using Catalog.API.Common.Dto;
 using Catalog.API.Infrastructure;
 using MediatR;
 using System;

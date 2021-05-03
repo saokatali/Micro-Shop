@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Catalog.API.Core.Dto;
+using Catalog.API.Common.Dto;
 using FluentValidation;
 
 namespace Catalog.API.Application.Validators

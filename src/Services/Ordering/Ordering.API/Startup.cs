@@ -18,6 +18,9 @@ using System.Text.Unicode;
 using System.Text;
 using System.Net;
 using Microsoft.AspNetCore.Mvc.Authorization;
+using MediatR;
+using System.Reflection;
+using Ordering.API.Policies;
 
 namespace Ordering.API
 {
@@ -36,6 +39,8 @@ namespace Ordering.API
             services.AddOptions();
             services.Configure<AppSettings>(Configuration);
             services.AddDbContext<DataContext>();
+            services.AddMediatR(Assembly.GetExecutingAssembly());
+            services.AddAutoMapper(Assembly.GetExecutingAssembly());
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(opions=> {
                 opions.RequireHttpsMetadata = true;
                 opions.SaveToken = true;
@@ -49,6 +54,12 @@ namespace Ordering.API
                     IssuerSigningKey = new SymmetricSecurityKey( Encoding.UTF8.GetBytes( Configuration["JWT:SecretKey"]))
                     
                 };
+            });
+            services.AddAuthorization(options=> {
+                options.AddPolicy("AtLeast18", policy =>
+                {
+                    policy.Requirements.Add(new MinimumAgeRequirement(18));
+                });
             });
             services.AddControllers(options=> {
                 options.Filters.Add(new AuthorizeFilter());

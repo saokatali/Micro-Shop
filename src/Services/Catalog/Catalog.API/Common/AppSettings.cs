@@ -1,4 +1,4 @@
-﻿namespace Catalog.API.Core
+﻿namespace Catalog.API.Common
 {
     public class AppSettings
     {

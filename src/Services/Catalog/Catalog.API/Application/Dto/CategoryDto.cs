@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Catalog.API.Core.Dto
+namespace Catalog.API.Common.Dto
 {
     public class CategoryDto
     {

@@ -10,7 +10,8 @@ namespace Ordering.API.Domain.Models
         PaymentPending,
         Shipped,
         Delevered,
-        Returned
+        Returned,
+        Canceled
 
     }
 }

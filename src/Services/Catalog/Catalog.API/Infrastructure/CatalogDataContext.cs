@@ -1,4 +1,4 @@
-﻿using Catalog.API.Core;
+﻿using Catalog.API.Common;
 using Catalog.API.Domain.Models.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
@@ -18,7 +18,7 @@ namespace Catalog.API.Infrastructure
         public DbSet<Review> Reviews { get; set; }
 
         #endregion
-
+        bool isInitialized;
 
 
 
@@ -30,12 +30,21 @@ namespace Catalog.API.Infrastructure
             AppSettings = appSettings.Value;
         }
 
+        public CatalogDataContext(DbContextOptions dbContextOptions):base(dbContextOptions)
+        {
+            isInitialized = true;
+        }
+
+
 
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            base.OnConfiguring(optionsBuilder);
-            optionsBuilder.UseSqlServer(AppSettings.SqlServer.ConnectionStrings);          
+            if (!isInitialized)
+            {
+                base.OnConfiguring(optionsBuilder);
+                optionsBuilder.UseSqlServer(AppSettings.SqlServer.ConnectionStrings);
+            }
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

@@ -1,7 +1,7 @@
 ﻿
 using Catalog.API.Application.Messages.Commands.Catalog;
 using Catalog.API.Application.Messages.Queries.Catalog;
-using Catalog.API.Core.Dto;
+using Catalog.API.Common.Dto;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -46,6 +46,7 @@ namespace Catalog.API.Controllers
         }
 
         [HttpPost]
+        [Authorize(Policy = "IsAdmin")]
         [ProducesResponseType((int)HttpStatusCode.Created)]
         public async Task<IActionResult> Create(ProductDto product)
         {
