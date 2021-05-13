@@ -3,6 +3,7 @@ using System.Reflection;
 using System.Text;
 using AutoMapper;
 using Catalog.API.Common;
+using Catalog.API.Hubs;
 using Catalog.API.Infrastructure;
 using Common.Web.Middleware;
 using FluentValidation.AspNetCore;
@@ -14,6 +15,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 
@@ -34,6 +36,7 @@ namespace Catalog.API
             services.AddOptions();
 
             services.Configure<AppSettings>(Configuration);
+
 
             services.AddDbContext<CatalogDataContext>(
                 opttions => {
@@ -95,6 +98,7 @@ namespace Catalog.API
                 //options.Filters.Add(new AuthorizeFilter(authPolicy));
             }).AddFluentValidation(cfg => cfg.RegisterValidatorsFromAssembly(Assembly.GetExecutingAssembly()));
             services.AddSwaggerGen(c => c.SwaggerDoc("v1", new OpenApiInfo { Title = "Catalog API", Version = "v1" }));
+            services.AddSignalR();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -128,6 +132,7 @@ namespace Catalog.API
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
+                endpoints.MapHub<CommentHub>("/comments");
             });
         }
     }

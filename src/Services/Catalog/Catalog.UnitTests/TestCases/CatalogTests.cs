@@ -30,9 +30,9 @@ public CatalogTests()
             mapper.Setup(e => e.Map<Product>(newProduct)).Returns(product);
 
             var optionsBuilder = new DbContextOptionsBuilder<CatalogDataContext>().UseInMemoryDatabase("Catalog");
-            var dbContext = new CatalogDataContext(optionsBuilder.Options);
+            //var dbContext = new CatalogDataContext(optionsBuilder.Options);
 
-            handler = new Create.Handler(dbContext, mapper.Object);
+            //handler = new Create.Handler(dbContext, mapper.Object);
 
         }
 

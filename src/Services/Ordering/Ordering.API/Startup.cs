@@ -21,6 +21,7 @@ using Microsoft.AspNetCore.Mvc.Authorization;
 using MediatR;
 using System.Reflection;
 using Ordering.API.Policies;
+using Common.Web.Middleware;
 
 namespace Ordering.API
 {
@@ -41,27 +42,30 @@ namespace Ordering.API
             services.AddDbContext<DataContext>();
             services.AddMediatR(Assembly.GetExecutingAssembly());
             services.AddAutoMapper(Assembly.GetExecutingAssembly());
-            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(opions=> {
+            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(opions =>
+            {
                 opions.RequireHttpsMetadata = true;
                 opions.SaveToken = true;
-                opions.TokenValidationParameters = new TokenValidationParameters 
-                { 
-                    ValidateIssuer=false,
-                    ValidateIssuerSigningKey=true,
-                    ValidateLifetime=true,
-                    ValidateAudience=false,
+                opions.TokenValidationParameters = new TokenValidationParameters
+                {
+                    ValidateIssuer = false,
+                    ValidateIssuerSigningKey = true,
+                    ValidateLifetime = true,
+                    ValidateAudience = false,
                     ClockSkew = TimeSpan.Zero,
-                    IssuerSigningKey = new SymmetricSecurityKey( Encoding.UTF8.GetBytes( Configuration["JWT:SecretKey"]))
-                    
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["JWT:SecretKey"]))
+
                 };
             });
-            services.AddAuthorization(options=> {
+            services.AddAuthorization(options =>
+            {
                 options.AddPolicy("AtLeast18", policy =>
                 {
                     policy.Requirements.Add(new MinimumAgeRequirement(18));
                 });
             });
-            services.AddControllers(options=> {
+            services.AddControllers(options =>
+            {
                 options.Filters.Add(new AuthorizeFilter());
             });
         }
@@ -69,10 +73,8 @@ namespace Ordering.API
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            if (env.IsDevelopment())
-            {
-                app.UseDeveloperExceptionPage();
-            }
+
+            app.UseException();
 
             app.UseHttpsRedirection();
 
