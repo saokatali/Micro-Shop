@@ -10,33 +10,37 @@ using RabbitMQ.Client.Events;
 using Notifications.API.Dtos;
 using System.Text.Json;
 using System.Text;
+using Notifications.API.Infrastructure.ServiceClients;
 
 namespace Notifications.API.Listeners.Events
 {
     public class OrderCreatedListener : IHostedService
     {
-        IBusClient busClient;
+        private readonly IBusClient busClient;
+        private readonly IOrderService orderService;
 
-
-        public OrderCreatedListener(IBusClient busClient)
+        public OrderCreatedListener(IBusClient busClient, IOrderService orderService)
         {
             this.busClient = busClient;
+            this.orderService = orderService;
         }
 
 
-            public Task StartAsync(CancellationToken cancellationToken)
+            public async Task StartAsync(CancellationToken cancellationToken)
             {
 
 
-                busClient.Subscribe( (obj, e) =>
+                busClient.Subscribe( async (obj, e) =>
                 {
-                    OrderDto order = JsonSerializer.Deserialize<OrderDto>(Encoding.UTF8.GetString(e.Body.ToArray()));
+                    OrderCreatedData order = JsonSerializer.Deserialize<OrderCreatedData>(Encoding.UTF8.GetString(e.Body.ToArray()));
+                    var orderDetails = await orderService.GetDetails(order.OrderId);
+
 
                     ((EventingBasicConsumer)obj).Model.BasicAck(e.DeliveryTag, false);
 
                 });
 
-                return Task.CompletedTask;
+
             }
 
             public Task StopAsync(CancellationToken cancellationToken)

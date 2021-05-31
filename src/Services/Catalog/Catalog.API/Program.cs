@@ -1,5 +1,6 @@
 using System;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using Serilog;
 using Serilog.Events;
@@ -10,12 +11,10 @@ namespace Catalog.API
     {
         public static void Main(string[] args)
         {
+            var configuation = new ConfigurationBuilder().AddJsonFile("appsettings.json").Build();
+
             Log.Logger = new LoggerConfiguration()
-            .MinimumLevel.Override("Microsoft", LogEventLevel.Information)
-            .Enrich.FromLogContext()
-            .WriteTo.Console()
-            .WriteTo.File("log.txt")
-            .WriteTo.Seq("http://localhost:5341/")
+              .ReadFrom.Configuration(configuation)
             .CreateLogger();
 
 

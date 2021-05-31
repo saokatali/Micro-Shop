@@ -13,6 +13,8 @@ using Microsoft.Extensions.Logging;
 using Common.MessageBrokers.Extension;
 using Common.MessageBrokers;
 using Notifications.API.Listeners.Events;
+using Notifications.API.Infrastructure.ServiceClients;
+using Polly;
 
 namespace Notifications.API
 {
@@ -28,9 +30,16 @@ namespace Notifications.API
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-
+            services.AddHttpClient<IOrderService, OrderService>(c =>
+            {
+                c.BaseAddress = new Uri(Configuration["OrderServiceUrl"]);
+                c.DefaultRequestHeaders.Add("Accept", "application/json");
+            }).AddTransientHttpErrorPolicy(policy => policy.WaitAndRetryAsync(3, _ => TimeSpan.FromSeconds(2)))
+            .AddTransientHttpErrorPolicy(policy => policy.CircuitBreakerAsync(5, TimeSpan.FromSeconds(30)));
+            
             services.AddControllers();
-            services.AddRabbitMQ(option => {
+            services.AddRabbitMQ(option =>
+            {
                 option.Host = Configuration["RabbitMQ:Host"];
                 option.UserName = Configuration["RabbitMQ:UserName"];
                 option.Password = Configuration["RabbitMQ:Password"];
@@ -58,7 +67,7 @@ namespace Notifications.API
                 endpoints.MapControllers();
             });
 
-          
+
 
         }
     }

@@ -13,7 +13,7 @@ namespace Ordering.API.Infrastructure
 {
     public class DataContext:DbContext
     {
-        AppSettings appSettings;
+        readonly AppSettings appSettings;
         public DataContext(IOptionsMonitor<AppSettings> options)
         {
             this.appSettings = options.CurrentValue;

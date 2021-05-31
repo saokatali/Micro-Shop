@@ -30,10 +30,10 @@ namespace Catalog.API.Infrastructure
             AppSettings = appSettings.Value;
         }
 
-        public CatalogDataContext(DbContextOptions dbContextOptions):base(dbContextOptions)
-        {
-            isInitialized = true;
-        }
+        //public CatalogDataContext(DbContextOptions dbContextOptions) : base(dbContextOptions)
+        //{
+        //    isInitialized = true;
+        //}
 
 
 

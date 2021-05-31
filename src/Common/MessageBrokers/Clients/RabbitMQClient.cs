@@ -39,7 +39,7 @@ namespace Common.MessageBrokers.Clients
                 channel = connection.CreateModel();
                
             }
-            catch
+            catch(Exception ex)
             {
                 
             }

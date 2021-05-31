@@ -85,3 +85,4 @@
 /src/Services/Ordering/Ordering.UnitTests/bin
 /src/Services/Ordering/Ordering.UnitTests/obj
 /src/Services/Catalog/Catalog.API/log.txt
+/src/Services/Catalog/Catalog.API/Logs/log.txt

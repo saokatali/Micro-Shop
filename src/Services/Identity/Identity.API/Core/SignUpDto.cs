@@ -16,6 +16,8 @@ namespace Identity.API.Core
         public string UserName { get; set; }
         [Required]
         public string PhoneNumber { get; set; }
+        [Required]
+        public IList<String> Roles { get; set; }
 
     }
 }

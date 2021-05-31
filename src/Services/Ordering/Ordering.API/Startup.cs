@@ -22,6 +22,7 @@ using MediatR;
 using System.Reflection;
 using Ordering.API.Policies;
 using Common.Web.Middleware;
+using Microsoft.OpenApi.Models;
 
 namespace Ordering.API
 {
@@ -39,6 +40,7 @@ namespace Ordering.API
         {
             services.AddOptions();
             services.Configure<AppSettings>(Configuration);
+            services.AddHttpContextAccessor();
             services.AddDbContext<DataContext>();
             services.AddMediatR(Assembly.GetExecutingAssembly());
             services.AddAutoMapper(Assembly.GetExecutingAssembly());
@@ -68,15 +70,33 @@ namespace Ordering.API
             {
                 options.Filters.Add(new AuthorizeFilter());
             });
+
+            services.AddSwaggerGen(c => c.SwaggerDoc("v1", new OpenApiInfo { Title = "Order API", Version = "v1" }));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
 
+
             app.UseException();
 
-            app.UseHttpsRedirection();
+            if (!env.IsDevelopment())
+            {
+                app.UseHsts();
+                app.UseHttpsRedirection();
+            }
+
+
+
+            app.UseSwagger();
+            app.UseSwaggerUI(c =>
+            {
+                c.RoutePrefix = string.Empty;
+                // string swaggerJsonBasePath = string.IsNullOrWhiteSpace(c.RoutePrefix) ? "." : "..";
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Order API");
+
+            });
 
             app.UseRouting();
             app.UseAuthentication();

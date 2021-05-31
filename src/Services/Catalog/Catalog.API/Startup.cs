@@ -19,6 +19,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 
+
 namespace Catalog.API
 {
     public class Startup
@@ -57,41 +58,41 @@ namespace Catalog.API
                 });
             });
 
-            services.AddAuthentication(options =>
-            {
-                options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-                options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-                options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
-            }).AddJwtBearer(options =>
-            {
-                options.RequireHttpsMetadata = true;
-                options.SaveToken = true;
-                options.TokenValidationParameters = new TokenValidationParameters
-                {
-                    ValidateIssuer = false,
-                    ValidateLifetime = true,
-                    ValidateAudience = false,
-                    ValidateIssuerSigningKey = true,
-                    ClockSkew = TimeSpan.Zero,
-                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["JWT:SecretKey"]))
+            //services.AddAuthentication(options =>
+            //{
+            //    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+            //    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            //    options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
+            //}).AddJwtBearer(options =>
+            //{
+            //    options.RequireHttpsMetadata = true;
+            //    options.SaveToken = true;
+            //    options.TokenValidationParameters = new TokenValidationParameters
+            //    {
+            //        ValidateIssuer = false,
+            //        ValidateLifetime = true,
+            //        ValidateAudience = false,
+            //        ValidateIssuerSigningKey = true,
+            //        ClockSkew = TimeSpan.Zero,
+            //        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["JWT:SecretKey"]))
 
-                };
-            });
+            //    };
+            //});
 
-            services.AddAuthorization( options=> 
-            {
-                options.AddPolicy("IsAdmin", policy =>
-                {
-                    policy.RequireClaim("Role", "Admin");
+            //services.AddAuthorization( options=> 
+            //{
+            //    options.AddPolicy("IsAdmin", policy =>
+            //    {
+            //        policy.RequireClaim("Role", "Admin");
                     
-                });
+            //    });
 
-                options.AddPolicy("AtLeast18", policy =>
-                {
-                    policy.RequireClaim("Role", "Admin");
+            //    options.AddPolicy("AtLeast18", policy =>
+            //    {
+            //        policy.RequireClaim("Role", "Admin");
 
-                });
-            });
+            //    });
+            //});
             
             services.AddControllers(options=> {
                 //var authPolicy = new AuthorizationPolicyBuilder().RequireAuthenticatedUser().Build();
@@ -112,14 +113,19 @@ namespace Catalog.API
                 app.UseHttpsRedirection();
             }
 
-            app.UseStaticFiles();
+            app.UseXContentTypeOptions();
+            app.UseReferrerPolicy(opt => opt.NoReferrer());
+            app.UseXXssProtection(opt => opt.EnabledWithBlockMode());
+            app.UseXfo(opt => opt.Deny());
+
+
 
             app.UseSwagger();
             app.UseSwaggerUI(c =>
             {
                 c.RoutePrefix = string.Empty;
                 // string swaggerJsonBasePath = string.IsNullOrWhiteSpace(c.RoutePrefix) ? "." : "..";
-                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Catalog APICatalog API");
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Catalog API");
 
             });
 
@@ -132,7 +138,7 @@ namespace Catalog.API
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
-                endpoints.MapHub<CommentHub>("/comments");
+                endpoints.MapHub<ReviewHub>("/Review");
             });
         }
     }

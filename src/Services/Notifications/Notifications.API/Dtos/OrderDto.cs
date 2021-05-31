@@ -7,10 +7,11 @@ namespace Notifications.API.Dtos
 {
     public class OrderDto
     {
-        public Guid CorrelationId { get; set; }
-
-        public Guid OrderId { get; set; }
-
-        public Guid UserId { get; set; }
+        public Guid CustomerId { get; set; }
+        public string ShippingAddress { get; set; }
+        public string BillingAddress { get; set; }
+        public double Total { get; set; }
+        public DateTime DeleveredBy { get; set; }
+        public IList<OrderItemDto> Items { get; set; }
     }
 }
