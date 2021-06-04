@@ -1,3 +1,4 @@
+using Common.Web.Middleware;
 using Identity.API.Core;
 using Identity.API.Infrastructure;
 using Microsoft.AspNetCore.Builder;
@@ -6,7 +7,6 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
-using Common.Web.Middleware;
 
 
 
@@ -30,12 +30,13 @@ namespace Identity.API
             services.AddDbContext<AppDbContext>(ServiceLifetime.Scoped);
             services.AddIdentity<AppUser, AppRole>().AddEntityFrameworkStores<AppDbContext>();
             services.AddControllers();
-            services.AddCors(options => {
+            services.AddCors(options =>
+            {
                 options.AddPolicy("DefaultCors", policy => policy.AllowAnyMethod().AllowAnyHeader().AllowAnyOrigin());
 
             });
             services.AddSwaggerGen(c => c.SwaggerDoc("v1", new OpenApiInfo { Title = "Identity API", Version = "v1" }));
-            
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -54,7 +55,6 @@ namespace Identity.API
             app.UseSwaggerUI(c =>
             {
                 c.RoutePrefix = string.Empty;
-                // string swaggerJsonBasePath = string.IsNullOrWhiteSpace(c.RoutePrefix) ? "." : "..";
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "Catalog APICatalog API");
 
             });

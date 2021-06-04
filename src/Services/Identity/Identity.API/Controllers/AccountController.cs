@@ -6,7 +6,6 @@ using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
 using Identity.API.Core;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
@@ -42,7 +41,7 @@ namespace Identity.API.Controllers
                 var token = GenerateJwtToken(user, roles);
                 return Ok(new { Token = token });
             }
-            else if(result.RequiresTwoFactor)
+            else if (result.RequiresTwoFactor)
             {
                 //Send a a code to the user and cache it
                 return Ok("TwoFactor");
@@ -54,7 +53,7 @@ namespace Identity.API.Controllers
 
         }
         [HttpPost("SignInTwoFactor")]
-        public async Task<IActionResult> SignInTwoFactor(string  code)
+        public async Task<IActionResult> SignInTwoFactor(string code)
         {
             var cachedCode = string.Empty; // get it from cache key
             var userName = string.Empty; // get it from cache Value
