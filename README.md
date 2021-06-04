@@ -14,9 +14,9 @@ It's an open source project , providing in-depth knowledge about building micros
 - [JWT](https://jwt.io), authentication, authorization
 - Communication via websockets using [SignalR](https://docs.microsoft.com/en-us/aspnet/core/signalr/?view=aspnetcore-2.1)
 - [CQRS](https://martinfowler.com/bliki/CQRS.html), Commands, Queries & Events handlers
-- Using [RabbitMQ](https://www.rabbitmq.com) as a message queue with [RawRabbit](https://github.com/pardahlman/RawRabbit)
+- Using [RabbitMQ](https://www.rabbitmq.com) as a message queue
 - Dealing with asynchronous requests, Process Managers and Sagas
-- Internal HTTP communication with [RestEase](https://github.com/canton7/RestEase)
+- Internal HTTP communication with [Polly](https://github.com/App-vNext/Polly.Extensions.Http)
 - Logging with [Serilog](https://serilog.net)
 - Building [Docker](https://www.docker.com) images, managing containers, networks and [registries](https://hub.docker.com)
 - Defining [Docker compose](https://docs.docker.com/compose) stacks
