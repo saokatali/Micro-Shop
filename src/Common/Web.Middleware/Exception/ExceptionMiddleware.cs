@@ -14,12 +14,12 @@ namespace Common.Web.Middleware
     {
         private readonly RequestDelegate next;
         private readonly ILogger<ExceptionMiddleware> logger;
-        IHostEnvironment env;
+        private readonly IHostEnvironment env;
 
         public ExceptionMiddleware(RequestDelegate next, ILogger<ExceptionMiddleware> logger, IHostEnvironment env)
         {
-            this.logger = logger;
             this.next = next;
+            this.logger = logger;
             this.env = env;
         }
 

@@ -1,13 +1,13 @@
-﻿using Catalog.API.Application.Messages.Commands.Category;
-using Catalog.API.Application.Messages.Queries.Category;
+﻿using System;
+using System.Collections.Generic;
+using System.Net;
+using System.Threading.Tasks;
+using Catalog.API.Application.Messages.Commands;
+using Catalog.API.Application.Messages.Queries;
 using Catalog.API.Common.Dto;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Net;
-using System.Threading.Tasks;
 
 namespace Catalog.API.Controllers
 {
@@ -26,7 +26,7 @@ namespace Catalog.API.Controllers
         [ProducesResponseType(typeof(List<CategoryDto>), (int)HttpStatusCode.OK)]
         public async Task<IActionResult> GetAll()
         {
-            foreach(var claim in User.Claims)
+            foreach (var claim in User.Claims)
             {
                 Console.WriteLine(claim.Type);
                 Console.WriteLine(claim.Value);
@@ -39,18 +39,18 @@ namespace Catalog.API.Controllers
         [ProducesResponseType((int)HttpStatusCode.NotFound)]
         public async Task<IActionResult> GetById(Guid id)
         {
-            return Ok(await mediator.Send(new ById.Query { Id=id }));
+            return Ok(await mediator.Send(new ById.Query { Id = id }));
         }
 
-       
+
 
         [HttpPost]
         [ProducesResponseType((int)HttpStatusCode.Created)]
         public async Task<IActionResult> Create(CategoryDto category)
         {
 
-           await mediator.Send(new Create.Command { Category = category });
-           return Created();
+            await mediator.Send(new Create.Command { Category = category });
+            return Created();
 
         }
 
@@ -60,7 +60,7 @@ namespace Catalog.API.Controllers
         public async Task<IActionResult> Update(Guid id, CategoryDto category)
         {
 
-            await mediator.Send(new Update.Command {Id=id, Category = category });
+            await mediator.Send(new Update.Command { Id = id, Category = category });
             return Ok();
 
         }
@@ -70,7 +70,7 @@ namespace Catalog.API.Controllers
         public async Task<IActionResult> Delete(Guid id)
         {
 
-            await mediator.Send(new Delete.Command { Id = id});
+            await mediator.Send(new Delete.Command { Id = id });
             return Ok();
 
         }

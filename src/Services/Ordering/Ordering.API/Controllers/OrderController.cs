@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using MediatR;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Ordering.API.Application.Dtos;
 using Ordering.API.Application.Messages.Commands.Orders;
@@ -29,12 +25,13 @@ namespace Ordering.API.Controllers
             return Ok(order);
         }
         [HttpPost]
-        public async  Task<IActionResult> Create(OrderDto order)
+        public async Task<IActionResult> Create(OrderDto order)
         {
-            var resonse = await mediator.Send(new Add.Command { Order=order } );
+            var resonse = await mediator.Send(new Add.Command { Order = order });
+           
 
             return Ok(resonse);
         }
-            
+
     }
 }

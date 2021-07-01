@@ -1,15 +1,13 @@
-﻿using AutoMapper;
+﻿using System;
+using System.Threading;
+using System.Threading.Tasks;
+using AutoMapper;
 using Catalog.API.Common.Dto;
 using Catalog.API.Infrastructure;
 using Common.Web.Middleware;
 using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading;
-using System.Threading.Tasks;
 
-namespace Catalog.API.Application.Messages.Queries.Category
+namespace Catalog.API.Application.Messages.Queries
 {
     public class ById
     {

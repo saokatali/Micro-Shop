@@ -2,6 +2,7 @@ using Common.Web.Middleware;
 using Identity.API.Core;
 using Identity.API.Infrastructure;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Cors.Infrastructure;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -15,6 +16,7 @@ namespace Identity.API
 {
     public class Startup
     {
+        private readonly string defaultCors = "DefaultCors";
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -29,13 +31,14 @@ namespace Identity.API
             services.Configure<AppSettings>(Configuration);
             services.AddDbContext<AppDbContext>(ServiceLifetime.Scoped);
             services.AddIdentity<AppUser, AppRole>().AddEntityFrameworkStores<AppDbContext>();
-            services.AddControllers();
+
             services.AddCors(options =>
             {
-                options.AddPolicy("DefaultCors", policy => policy.AllowAnyMethod().AllowAnyHeader().AllowAnyOrigin());
+                options.AddPolicy(defaultCors, policy => policy.AllowAnyMethod().AllowAnyHeader().AllowAnyOrigin());
 
             });
             services.AddSwaggerGen(c => c.SwaggerDoc("v1", new OpenApiInfo { Title = "Identity API", Version = "v1" }));
+            services.AddControllers();
 
         }
 
@@ -60,17 +63,25 @@ namespace Identity.API
             });
 
             app.UseRouting();
-
+            app.UseCors(defaultCors);
 
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
             });
 
+
+            applicationLifetime.ApplicationStarted.Register(() => 
+            { 
+
+            });
+
             applicationLifetime.ApplicationStopped.Register(() =>
             {
 
             });
+
+
 
 
         }

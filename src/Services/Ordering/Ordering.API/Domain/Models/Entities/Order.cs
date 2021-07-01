@@ -1,12 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Ordering.API.Application.Dtos;
 
 namespace Ordering.API.Domain.Models.Entities
 {
-    public class Order:BaseEntity
+    public class Order : BaseEntity
     {
         public long OrderId { get; set; }
         public Guid CustomerId { get; set; }

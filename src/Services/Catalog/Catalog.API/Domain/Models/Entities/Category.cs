@@ -6,6 +6,6 @@ namespace Catalog.API.Domain.Models.Entities
     {
         public string Name { get; set; }
 
-        public List<CategoryProduct> Products { get; set; }
+        public ICollection<Product> Products { get; set; }
     }
 }

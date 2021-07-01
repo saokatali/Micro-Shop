@@ -1,24 +1,22 @@
-﻿using AutoMapper;
-using Catalog.API.Application.Dto;
-using Catalog.API.Common.Dto;
-using Catalog.API.Domain.Models.Entities;
-using Catalog.API.Infrastructure;
-using MediatR;
-using Microsoft.EntityFrameworkCore;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using AutoMapper;
+using Catalog.API.Application.Dto;
+using Catalog.API.Infrastructure;
+using MediatR;
+using Microsoft.EntityFrameworkCore;
 
 namespace Catalog.API.Application.Messages.Queries.Review
 {
     public class AllByProduct
     {
 
-        public class Query : IRequest<List<ReviewDto>> 
+        public class Query : IRequest<List<ReviewDto>>
         {
-            public Guid  ProductId { get; set; }
+            public Guid ProductId { get; set; }
         }
 
         public class Handler : IRequestHandler<Query, List<ReviewDto>>

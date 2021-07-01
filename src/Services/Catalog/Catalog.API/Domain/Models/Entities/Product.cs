@@ -10,9 +10,9 @@ namespace Catalog.API.Domain.Models.Entities
         public decimal Price { get; set; }
         public int Quantity { get; set; }
 
-        public List<CategoryProduct> Categories { get; set; }
+        public ICollection<Category> Categories { get; set; }
 
-        public List<Review> Reviews { get; set; }
+        public ICollection<Review> Reviews { get; set; }
 
     }
 }

@@ -1,13 +1,13 @@
-﻿using AutoMapper;
-using Catalog.API.Common.Dto;
-using Catalog.API.Infrastructure;
-using Common.Web.Middleware;
-using MediatR;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using AutoMapper;
+using Catalog.API.Common.Dto;
+using Catalog.API.Infrastructure;
+using Common.Web.Middleware;
+using MediatR;
 using Microsoft.EntityFrameworkCore;
 
 namespace Catalog.API.Application.Messages.Queries.Catalog
@@ -33,7 +33,7 @@ namespace Catalog.API.Application.Messages.Queries.Catalog
 
             public async Task<List<ProductDto>> Handle(Query request, CancellationToken cancellationToken)
             {
-                var category = await dataContext.Categories.Include(e=>e.Products).FirstOrDefaultAsync(e => e.Id == request.CategoryId);
+                var category = await dataContext.Categories.Include(e => e.Products).FirstOrDefaultAsync(e => e.Id == request.CategoryId);
 
 
 
@@ -42,8 +42,7 @@ namespace Catalog.API.Application.Messages.Queries.Catalog
 
                     throw new NotFoundException($"The Category with id {request.CategoryId} not found");
                 }
-                var products = category.Products.Select(e =>  e.Product);
-                return mapper.Map<List<ProductDto>>(products);
+                return mapper.Map<List<ProductDto>>(category.Products);
             }
         }
     }

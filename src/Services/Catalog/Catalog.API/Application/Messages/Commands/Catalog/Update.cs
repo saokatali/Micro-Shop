@@ -1,15 +1,13 @@
-﻿using AutoMapper;
+﻿using System;
+using System.Threading;
+using System.Threading.Tasks;
+using AutoMapper;
 using Catalog.API.Common.Dto;
+using Catalog.API.Domain.Models.Entities;
 using Catalog.API.Infrastructure;
 using Common.Web.Middleware;
 using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading;
-using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
-using Catalog.API.Domain.Models.Entities;
 
 namespace Catalog.API.Application.Messages.Commands.Catalog
 {
@@ -55,7 +53,7 @@ namespace Catalog.API.Application.Messages.Commands.Catalog
 
                 foreach (var categoryId in request.Product.CaregoryIds)
                 {
-                    product.Categories.Add(new CategoryProduct { ProductId = product.Id, CategoryId = categoryId });
+                    product.Categories.Add(new Category { Id = categoryId});
 
                 }
 

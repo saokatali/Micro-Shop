@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Threading;
@@ -11,7 +10,7 @@ using Ordering.API.Domain.Models.Entities;
 
 namespace Ordering.API.Infrastructure
 {
-    public class DataContext:DbContext
+    public class DataContext : DbContext
     {
         readonly AppSettings appSettings;
         public DataContext(IOptionsMonitor<AppSettings> options)

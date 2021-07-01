@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading;
+﻿using System.Threading;
 using System.Threading.Tasks;
 using AutoMapper;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Ordering.API.Application.Dtos;
-using Ordering.API.Domain.Models;
 using Ordering.API.Domain.Models.Entities;
 using Ordering.API.Infrastructure;
 
@@ -15,7 +11,7 @@ namespace Ordering.API.Application.Messages.Commands.Orders
 {
     public class Add
     {
-        public class Command:IRequest<Unit>
+        public class Command : IRequest<Unit>
         {
             public OrderDto Order { get; set; }
         }

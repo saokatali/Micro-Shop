@@ -1,8 +1,8 @@
-﻿using Catalog.API.Domain.Models.Entities;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
+using Catalog.API.Domain.Models.Entities;
 
 namespace Catalog.API.Infrastructure.Repositories
 {

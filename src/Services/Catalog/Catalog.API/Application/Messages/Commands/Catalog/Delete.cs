@@ -1,11 +1,9 @@
-﻿using Catalog.API.Infrastructure;
-using Common.Web.Middleware;
-using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System;
 using System.Threading;
 using System.Threading.Tasks;
+using Catalog.API.Infrastructure;
+using Common.Web.Middleware;
+using MediatR;
 
 namespace Catalog.API.Application.Messages.Commands.Catalog
 {

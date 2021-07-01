@@ -1,11 +1,11 @@
-﻿using AutoMapper;
-using Catalog.API.Common.Dto;
-using Catalog.API.Infrastructure;
-using MediatR;
-using System;
+﻿using System;
 using System.Threading;
 using System.Threading.Tasks;
+using AutoMapper;
+using Catalog.API.Common.Dto;
+using Catalog.API.Infrastructure;
 using Common.Web.Middleware;
+using MediatR;
 
 
 namespace Catalog.API.Application.Messages.Queries.Catalog
@@ -31,10 +31,10 @@ namespace Catalog.API.Application.Messages.Queries.Catalog
 
             public async Task<ProductDto> Handle(Query request, CancellationToken cancellationToken)
             {
-               var product =  await dataContext.Products.FindAsync(request.Id);
-                if(product == null)
+                var product = await dataContext.Products.FindAsync(request.Id);
+                if (product == null)
                 {
-                    
+
                     throw new NotFoundException($"The Product with id {request.Id} not found");
                 }
                 return mapper.Map<ProductDto>(product);

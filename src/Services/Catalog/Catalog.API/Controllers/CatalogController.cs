@@ -1,18 +1,17 @@
 ﻿
-using Catalog.API.Application.Messages.Commands.Catalog;
-using Catalog.API.Application.Messages.Queries.Catalog;
-using Catalog.API.Common.Dto;
-using MediatR;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Net;
 using System.Threading.Tasks;
+using Catalog.API.Application.Messages.Commands.Catalog;
+using Catalog.API.Application.Messages.Queries.Catalog;
+using Catalog.API.Common.Dto;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 
 namespace Catalog.API.Controllers
 {
-  
+
     public class CatalogController : BaseController
     {
 
@@ -62,7 +61,7 @@ namespace Catalog.API.Controllers
         public async Task<IActionResult> Update(ProductDto product, Guid id)
         {
 
-            await Mediator.Send(new Update.Command { Product = product, Id=id });
+            await Mediator.Send(new Update.Command { Product = product, Id = id });
             return Ok();
 
         }

@@ -1,15 +1,13 @@
-﻿using AutoMapper;
+﻿using System.Collections.Generic;
+using System.Threading;
+using System.Threading.Tasks;
+using AutoMapper;
 using Catalog.API.Common.Dto;
 using Catalog.API.Infrastructure;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading;
-using System.Threading.Tasks;
 
-namespace Catalog.API.Application.Messages.Queries.Category
+namespace Catalog.API.Application.Messages.Queries
 {
     public class All
     {

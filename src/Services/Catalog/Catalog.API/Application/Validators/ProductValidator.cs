@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Catalog.API.Common.Dto;
+﻿using Catalog.API.Common.Dto;
 using FluentValidation;
 
 namespace Catalog.API.Application.Validators
 {
-    public class ProductValidator:AbstractValidator<ProductDto>
+    public class ProductValidator : AbstractValidator<ProductDto>
     {
         public ProductValidator()
         {

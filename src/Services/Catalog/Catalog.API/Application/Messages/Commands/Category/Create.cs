@@ -1,19 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading;
+﻿using System.Threading;
 using System.Threading.Tasks;
 using AutoMapper;
 using Catalog.API.Common.Dto;
-using Catalog.API.Domain.Models.Entities;
 using Catalog.API.Infrastructure;
 using MediatR;
 
-namespace Catalog.API.Application.Messages.Commands.Category
+namespace Catalog.API.Application.Messages.Commands
 {
     public class Create
     {
-        public class Command:IRequest
+        public class Command : IRequest
         {
             public CategoryDto Category { get; set; }
 
@@ -40,7 +36,7 @@ namespace Catalog.API.Application.Messages.Commands.Category
                 await dataContext.SaveChangesAsync();
                 return new Unit();
 
-                
+
             }
         }
 

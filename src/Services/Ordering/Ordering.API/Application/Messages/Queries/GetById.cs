@@ -1,14 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading;
+﻿using System.Threading;
 using System.Threading.Tasks;
+using AutoMapper;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Ordering.API.Application.Dtos;
 using Ordering.API.Infrastructure;
-using AutoMapper.QueryableExtensions;
-using AutoMapper;
 
 namespace Ordering.API.Application.Messages.Queries
 {

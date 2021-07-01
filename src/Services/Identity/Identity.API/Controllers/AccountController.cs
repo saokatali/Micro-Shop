@@ -34,6 +34,7 @@ namespace Identity.API.Controllers
 
 
             var result = await signInManager.PasswordSignInAsync(data.UserName, data.Password, false, false);
+            
             if (result.Succeeded)
             {
                 var user = userManager.Users.SingleOrDefault(r => r.UserName == data.UserName);

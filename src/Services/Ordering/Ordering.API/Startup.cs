@@ -1,28 +1,20 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using System.Reflection;
+using System.Text;
+using Common.Web.Middleware;
+using MediatR;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
+using Microsoft.IdentityModel.Tokens;
+using Microsoft.OpenApi.Models;
 using Ordering.API.Common;
 using Ordering.API.Infrastructure;
-using Microsoft.IdentityModel.Tokens;
-using System.Text.Unicode;
-using System.Text;
-using System.Net;
-using Microsoft.AspNetCore.Mvc.Authorization;
-using MediatR;
-using System.Reflection;
 using Ordering.API.Policies;
-using Common.Web.Middleware;
-using Microsoft.OpenApi.Models;
 
 namespace Ordering.API
 {

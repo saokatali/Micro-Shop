@@ -1,21 +1,17 @@
-﻿using AutoMapper;
-using Catalog.API.Common.Dto;
+﻿using System;
+using System.Threading;
+using System.Threading.Tasks;
 using Catalog.API.Infrastructure;
 using Common.Web.Middleware;
 using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading;
-using System.Threading.Tasks;
 
-namespace Catalog.API.Application.Messages.Commands.Category
+namespace Catalog.API.Application.Messages.Commands
 {
     public class Delete
     {
         public class Command : IRequest
         {
-         
+
             public Guid Id { get; set; }
 
         }

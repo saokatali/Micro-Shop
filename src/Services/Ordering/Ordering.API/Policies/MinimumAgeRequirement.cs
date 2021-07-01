@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Claims;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.DataProtection.XmlEncryption;
 
 namespace Ordering.API.Policies
 {
@@ -24,12 +19,12 @@ namespace Ordering.API.Policies
         {
             if (!context.User.HasClaim(c => c.Type == "Age"))
             {
-               
+
                 return Task.CompletedTask;
             }
 
             var age = int.Parse(context.User.FindFirst(c => c.Type.Equals("Age")).Value);
-           
+
 
             if (age >= requirement.MinimumAge)
             {

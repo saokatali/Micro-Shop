@@ -1,15 +1,12 @@
-﻿using AutoMapper;
+﻿using System;
+using System.Threading;
+using System.Threading.Tasks;
 using Catalog.API.Common.Dto;
 using Catalog.API.Infrastructure;
 using Common.Web.Middleware;
 using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading;
-using System.Threading.Tasks;
 
-namespace Catalog.API.Application.Messages.Commands.Category
+namespace Catalog.API.Application.Messages.Commands
 {
     public class Update
     {
@@ -24,7 +21,7 @@ namespace Catalog.API.Application.Messages.Commands.Category
         {
             private readonly CatalogDataContext dataContext;
 
-        
+
 
             public Handler(CatalogDataContext dataContext)
             {
@@ -44,7 +41,7 @@ namespace Catalog.API.Application.Messages.Commands.Category
                 }
 
                 category.UpdatedDate = DateTime.UtcNow;
-                category.Name = request.Category.Name;             
+                category.Name = request.Category.Name;
                 await dataContext.SaveChangesAsync();
 
                 return new Unit();

@@ -1,14 +1,12 @@
-﻿using AutoMapper;
+﻿using System;
+using System.Collections.Generic;
+using System.Threading;
+using System.Threading.Tasks;
+using AutoMapper;
 using Catalog.API.Common.Dto;
 using Catalog.API.Domain.Models.Entities;
 using Catalog.API.Infrastructure;
 using MediatR;
-using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading;
-using System.Threading.Tasks;
 
 namespace Catalog.API.Application.Messages.Commands.Catalog
 {
@@ -39,13 +37,13 @@ namespace Catalog.API.Application.Messages.Commands.Catalog
                 var product = new Product { Name = newProduct.Name, Description = newProduct.Description, Price = newProduct.Price, Quantity = newProduct.Quantity, Vendor = newProduct.Vendor };
 
                 product.Id = newProduct.Id != default ? newProduct.Id : product.Id;
-                product.Categories = new List<CategoryProduct>();
+                product.Categories = new List<Category>();
                 foreach (var categoryId in newProduct.CaregoryIds)
                 {
-                    product.Categories.Add(new CategoryProduct { ProductId = product.Id, CategoryId = categoryId });
+                    product.Categories.Add(new Category { Id = categoryId });
 
                 }
-            
+
                 dataContext.Add(product);
                 var success = await dataContext.SaveChangesAsync() > 0;
                 if (success)

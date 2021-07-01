@@ -2,72 +2,37 @@
 {
     public class AppSettings
     {
-        public SqlServer SqlServer { get; set; }
+        public SqlServerOptions SqlServer { get; set; }
 
-        public MongoDBSettings MongoDB { get; set; }
+        public LoggingOptions Logging { get; set; }
 
-        public Logging Logging { get; set; }
-
-        public JWT JWT { get; set; }
-        public RedisSettings Redis { get; set; }
-
-        public RabbitMQSettings RabbitMQ { get; set; }
+        public JWTOptions JWT { get; set; }
 
     }
 
-    public class SqlServer
+    public class SqlServerOptions
     {
         public string ConnectionStrings { get; set; }
 
 
     }
 
-    public class Logging
+    public class LoggingOptions
     {
         public string Provider { get; set; }
         public bool IsEnabled { get; set; }
     }
 
-    public class MongoDBSettings
-    {
-        public string ConnectionStrings { get; set; }
 
-        public string Db { get; set; }
-    }
 
-    public class JWT
+    public class JWTOptions
     {
         public string SecretKey { get; set; }
         public string Issuer { get; set; }
         public int ExpireDays { get; set; }
     }
 
-    public class RedisSettings
-    {
-        public string Configuration { get; set; }
 
-        public string InstanceName { get; set; }
 
-    }
 
-    public class RabbitMQSettings
-    {
-        public string Host { get; set; }
-
-        public int Port { get; set; }
-
-        public string VHost { get; set; }
-        public string User { get; set; }
-
-        public string Pass { get; set; }
-
-        public string Exchange { get; set; }
-
-        public string ExchangeType { get; set; }
-
-        public string Queue { get; set; }
-
-        public string RoutingKey { get; set; }
-
-    }
 }

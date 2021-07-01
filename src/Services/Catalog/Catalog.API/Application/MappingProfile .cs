@@ -10,7 +10,7 @@ namespace Catalog.API.Application
         {
             CreateMap<Product, ProductDto>();
             CreateMap<Category, CategoryDto>();
-            
+
         }
     }
 }
