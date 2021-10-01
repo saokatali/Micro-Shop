@@ -33,7 +33,7 @@ namespace Ordering.API
             services.AddOptions();
             services.Configure<AppSettings>(Configuration);
             services.AddHttpContextAccessor();
-            services.AddDbContext<DataContext>();
+            services.AddDbContext<DataContext>(ServiceLifetime.Transient);
             services.AddMediatR(Assembly.GetExecutingAssembly());
             services.AddAutoMapper(Assembly.GetExecutingAssembly());
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(opions =>
@@ -57,7 +57,14 @@ namespace Ordering.API
                 {
                     policy.Requirements.Add(new MinimumAgeRequirement(18));
                 });
+
+                options.AddPolicy("AdminRole", policy => {
+                    policy.RequireClaim("Role", "Admin");
+                });
+
             });
+
+
             services.AddControllers(options =>
             {
                 options.Filters.Add(new AuthorizeFilter());

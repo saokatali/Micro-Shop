@@ -6,6 +6,8 @@
 
         public Logging Logging { get; set; }
 
+        public bool IsTest { get; set; }
+
     }
 
     public class SqlServer

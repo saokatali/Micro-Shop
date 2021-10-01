@@ -1,5 +1,6 @@
 ﻿using System.Threading.Tasks;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Ordering.API.Application.Dtos;
 using Ordering.API.Application.Messages.Commands.Orders;
@@ -9,6 +10,7 @@ namespace Ordering.API.Controllers
 {
     [Route("[controller]")]
     [ApiController]
+    [Authorize(Policy = "AtLeast18")]
     public class OrderController : ControllerBase
     {
         private readonly IMediator mediator;
@@ -28,7 +30,7 @@ namespace Ordering.API.Controllers
         public async Task<IActionResult> Create(OrderDto order)
         {
             var resonse = await mediator.Send(new Add.Command { Order = order });
-           
+
 
             return Ok(resonse);
         }

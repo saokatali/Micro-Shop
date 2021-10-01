@@ -38,15 +38,15 @@ namespace Common.Web.Middleware
 
         private Task HandleExceptionAsync(HttpContext context, Exception exception)
         {
-            context.Response.ContentType = "application/json";
+            //context.Response.ContentType = "application/json";
             context.Response.StatusCode = GetStatusCode(exception);
 
-            return context.Response.WriteAsync(new ErrorDetails()
+            return context.Response.WriteAsJsonAsync(new ErrorDetails()
             {
 
                 Message = exception.Message,
                 StackTrace = env.IsDevelopment() ? exception.StackTrace : string.Empty
-            }.ToString());
+            });
         }
 
         private int GetStatusCode(Exception exception)
@@ -69,10 +69,10 @@ namespace Common.Web.Middleware
             public string Message { get; set; }
             public string StackTrace { get; set; }
 
-            public override string ToString()
-            {
-                return JsonSerializer.Serialize(this);
-            }
+            //public override string ToString()
+            //{
+            //    return JsonSerializer.Serialize(this);
+            //}
         }
     }
 
