@@ -39,11 +39,12 @@ namespace Catalog.API.Application.Messages.Commands.Catalog
                     throw new NotFoundException($"The product with id {request.Id} not found");
                 }
 
-                product.UpdatedDate = DateTime.UtcNow;
-                product.IsDeleted = true;
-                await dataContext.SaveChangesAsync();
+               // product.UpdatedDate = DateTime.UtcNow;
+               // product.IsDeleted = true;
+               dataContext.Remove(product);
+               await dataContext.SaveChangesAsync();
 
-                return new Unit();
+                return Unit.Value;
 
 
             }

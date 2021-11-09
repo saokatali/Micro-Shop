@@ -10,12 +10,13 @@ namespace Catalog.API.Controllers
     {
 
 
-
+        //Service Locator
         protected IMediator Mediator => (IMediator)HttpContext.RequestServices.GetService(typeof(IMediator));
 
         [NonAction]
         public IActionResult Created()
         {
+
             return StatusCode((int)HttpStatusCode.Created);
         }
     }

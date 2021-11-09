@@ -1,0 +1,3 @@
+is_global = true
+build_property.RootNamespace = Payment.UnitTests
+build_property.ProjectDir = D:\Practice\Dotnet\Micro-Shop\src\Services\Payment\Payment.UnitTests\

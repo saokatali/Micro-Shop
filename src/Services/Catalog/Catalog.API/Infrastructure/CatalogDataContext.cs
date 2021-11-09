@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using Catalog.API.Common;
 using Catalog.API.Domain.Models.Entities;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 
 namespace Catalog.API.Infrastructure
@@ -39,10 +39,10 @@ namespace Catalog.API.Infrastructure
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
 
-                base.OnConfiguring(optionsBuilder);
+            base.OnConfiguring(optionsBuilder);
             if (!AppSettings.IsTest)
             {
-                optionsBuilder.UseSqlServer(AppSettings.SqlServer.ConnectionStrings);
+                optionsBuilder.UseSqlServer(AppSettings.SqlServer.ConnectionStrings).LogTo(Console.WriteLine, LogLevel.Information).EnableSensitiveDataLogging();
             }
             else
             {

@@ -1,0 +1,16 @@
+{
+  "Version": 1,
+  "ProjectMap": {
+    "046ab2ec-f275-41d7-831d-bd89b1dfc167": {
+      "ProjectGuid": "046ab2ec-f275-41d7-831d-bd89b1dfc167",
+      "DisplayName": "Payment.API",
+      "ColorIndex": 0
+    },
+    "90b053f1-bbdc-405f-8913-97826befeda5": {
+      "ProjectGuid": "90b053f1-bbdc-405f-8913-97826befeda5",
+      "DisplayName": "Payment.UnitTests",
+      "ColorIndex": 1
+    }
+  },
+  "NextColorIndex": 2
+}

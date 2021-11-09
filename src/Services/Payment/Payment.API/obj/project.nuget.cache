@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "b6kovZzgqkZ7Hk78iGuZqHRV6yui4LzUXBi9sHwX32KtoCk1KUyR3lA4Y3MFzMhtjXey9eQBtx6ZaVAbtd37Wg==",
+  "success": true,
+  "projectFilePath": "D:\\Practice\\Dotnet\\Micro-Shop\\src\\Services\\Payment\\Payment.API\\Payment.API.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\saoka\\.nuget\\packages\\microsoft.visualstudio.azure.containers.tools.targets\\1.11.1\\microsoft.visualstudio.azure.containers.tools.targets.1.11.1.nupkg.sha512"
+  ],
+  "logs": []
+}

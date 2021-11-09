@@ -42,7 +42,7 @@ namespace Catalog.API.Application.Messages.Commands.Catalog
                     throw new NotFoundException($"The product with id {request.Id} not found");
                 }
 
-                product.UpdatedDate = DateTime.UtcNow;
+               // product.UpdatedDate = DateTime.UtcNow;
                 product.Name = request.Product.Name;
                 product.Description = request.Product.Description;
                 product.Quantity = request.Product.Quantity;
@@ -53,13 +53,13 @@ namespace Catalog.API.Application.Messages.Commands.Catalog
 
                 foreach (var categoryId in request.Product.CaregoryIds)
                 {
-                    product.Categories.Add(new Category { Id = categoryId});
+                    product.Categories.Add(new Category { Id = categoryId });
 
                 }
 
                 await dataContext.SaveChangesAsync();
 
-                return new Unit();
+                return Unit.Value;
 
 
             }

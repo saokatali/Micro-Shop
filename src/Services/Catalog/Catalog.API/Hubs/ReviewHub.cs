@@ -22,7 +22,7 @@ namespace Catalog.API.Hubs
         {
             var httpContext = Context.GetHttpContext();
             var productId = httpContext.Request.Query["productId"];
-            Groups.AddToGroupAsync(Context.ConnectionId, productId);
+            Groups.AddToGroupAsync(Context.ConnectionId, productId[0]);
             Clients.Caller.SendAsync("LoadReviews", mediator.Send(new AllByProduct.Query { ProductId = Guid.Parse(productId) }));
             return base.OnConnectedAsync();
         }

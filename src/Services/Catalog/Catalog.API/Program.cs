@@ -19,7 +19,7 @@ namespace Catalog.API
             {
                 Log.Information("Starting web host");
                 CreateHostBuilder(args).Build().Run();
-                
+
             }
             catch (Exception ex)
             {
