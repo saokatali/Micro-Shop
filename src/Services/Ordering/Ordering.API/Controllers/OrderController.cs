@@ -1,5 +1,4 @@
-﻿using System.Threading.Tasks;
-using MediatR;
+﻿using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Ordering.API.Application.Dtos;
@@ -21,19 +20,19 @@ namespace Ordering.API.Controllers
         }
 
         [HttpGet]
+        [ProducesErrorResponseType(typeof(OrderDto))]
         public async Task<IActionResult> Get(long orderId)
         {
             var order = await mediator.Send(new GetById.Query { orderId = orderId });
             return Ok(order);
         }
+
         [HttpPost]
         public async Task<IActionResult> Create(OrderDto order)
         {
             var resonse = await mediator.Send(new Add.Command { Order = order });
 
-
             return Ok(resonse);
         }
-
     }
 }

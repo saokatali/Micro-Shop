@@ -1,18 +1,19 @@
-﻿using System;
-using System.Linq;
-using System.Reflection;
-using System.Threading;
-using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 using Ordering.API.Common;
 using Ordering.API.Domain.Models.Entities;
+using System.Reflection;
 
 namespace Ordering.API.Infrastructure
 {
     public class DataContext : DbContext
     {
-        readonly AppSettings appSettings;
+        private readonly AppSettings appSettings;
+
+        const string SqlServerProvider = "SqlServer";
+        const string PostgresProvider = "Postgres";
+        const string InMemoryProvider = "InMemory";
+
         public DataContext(IOptionsMonitor<AppSettings> options)
         {
             this.appSettings = options.CurrentValue;
@@ -34,21 +35,23 @@ namespace Ordering.API.Infrastructure
             {
                 if (entry.State == EntityState.Added || entry.State == EntityState.Modified || entry.State == EntityState.Deleted)
                 {
-                    var entity = entry.Entity as BaseEntity;
+                    var entity = entry.Entity as EntityBase;
                     if (entity != null)
                     {
                         entity.UpdatedDate = DateTime.UtcNow;
-
+                        if (entry.State == EntityState.Added)
+                        {
+                            entity.CreatedDate = DateTime.UtcNow;
+                        }
 
                         if (entry.State == EntityState.Deleted)
                         {
                             entry.State = EntityState.Modified;
                             entity.IsDeleted = true;
                         }
+                       
                     }
-
                 }
-
             }
 
             return base.SaveChangesAsync(cancellationToken);
@@ -57,7 +60,21 @@ namespace Ordering.API.Infrastructure
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             base.OnConfiguring(optionsBuilder);
-            optionsBuilder.UseSqlServer(appSettings.SqlServer.ConnectionStrings);
+            switch (appSettings.Database.Provider)
+            {
+                case SqlServerProvider:
+                    optionsBuilder.UseSqlServer(appSettings.SqlServer.ConnectionStrings);
+                    break;
+                case PostgresProvider:
+                    optionsBuilder.UseSqlServer(appSettings.Postgres.ConnectionStrings);
+                    break;
+                case InMemoryProvider:
+                    optionsBuilder.UseInMemoryDatabase("Db");
+                    break;
+
+            }
+           
+           
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -67,26 +84,22 @@ namespace Ordering.API.Infrastructure
             {
                 var clrType = type.ClrType;
 
-
                 if (clrType.BaseType.IsClass && clrType.BaseType.Name.Contains("BaseEntity"))
                 {
                     var method = SetGlobalQueryMethod.MakeGenericMethod(clrType);
                     method.Invoke(this, new object[] { modelBuilder });
                 }
-
-
             }
         }
 
-        static readonly MethodInfo SetGlobalQueryMethod = typeof(DataContext).GetMethods(BindingFlags.Public | BindingFlags.Instance)
+        private static readonly MethodInfo SetGlobalQueryMethod = typeof(DataContext).GetMethods(BindingFlags.Public | BindingFlags.Instance)
                                                        .Single(t => t.IsGenericMethod && t.Name == "SetGlobalQuery");
 
-        public void SetGlobalQuery<T>(ModelBuilder builder) where T : BaseEntity
+        public void SetGlobalQuery<T>(ModelBuilder builder) where T : EntityBase
         {
-
             builder.Entity<T>().HasQueryFilter(e => !e.IsDeleted);
         }
 
-        #endregion
+        #endregion overrides
     }
 }

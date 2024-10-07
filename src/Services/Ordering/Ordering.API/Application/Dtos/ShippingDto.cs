@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Ordering.API.Application.Dtos
+﻿namespace Ordering.API.Application.Dtos
 {
     public class ShippingDto
     {

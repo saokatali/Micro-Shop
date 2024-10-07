@@ -12,7 +12,6 @@ namespace Ordering.API.Application
             CreateMap<OrderItemDto, OrderItem>();
             CreateMap<Order, OrderDto>();
             CreateMap<OrderDto, Order>();
-
         }
     }
 }

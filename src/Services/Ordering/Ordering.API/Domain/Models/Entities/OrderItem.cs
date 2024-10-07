@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Ordering.API.Domain.Models.Entities
 {
@@ -9,8 +10,8 @@ namespace Ordering.API.Domain.Models.Entities
         public Guid ProductId { get; set; }
         public string ProductName { get; set; }
         public string ImageUrl { get; set; }
+        [Column(TypeName = "decimal(20,5)")]
         public decimal Price { get; set; }
         public int Quantity { get; set; }
-
     }
 }

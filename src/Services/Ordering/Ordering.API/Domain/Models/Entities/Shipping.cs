@@ -1,13 +1,12 @@
-﻿using System;
-
-namespace Ordering.API.Domain.Models.Entities
+﻿namespace Ordering.API.Domain.Models.Entities
 {
-    public class Shipping
+    public class Shipping:EntityBase
     {
-        public Guid ShippingId { get; set; }
+
         public string AwbNumber { get; set; }
         public string CourierName { get; set; }
         public DateTime ShiipedDate { get; set; }
-
+        public long OrderId { get; set; }
+        public Order Order { get; set; }
     }
 }

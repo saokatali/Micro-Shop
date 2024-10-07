@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using Ordering.API.Domain.Models;
+﻿using Ordering.API.Domain.Models;
 using Ordering.API.Domain.Models.Entities;
 
 namespace Ordering.API.Application.Dtos

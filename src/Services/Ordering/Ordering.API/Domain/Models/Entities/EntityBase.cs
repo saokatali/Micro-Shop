@@ -1,14 +1,10 @@
-﻿using System;
-
-namespace Ordering.API.Domain.Models.Entities
+﻿namespace Ordering.API.Domain.Models.Entities
 {
-    public abstract class BaseEntity
+    public abstract class EntityBase
     {
         public Guid Id { get; set; } = Guid.NewGuid();
-        public DateTime CreatedDate { get; set; } = DateTime.UtcNow;
+        public DateTime CreatedDate { get; set; } 
         public DateTime UpdatedDate { get; set; } = DateTime.UtcNow;
         public bool IsDeleted { get; set; } = false;
-
-
     }
 }

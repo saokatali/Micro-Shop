@@ -1,6 +1,4 @@
-﻿using System.Threading;
-using System.Threading.Tasks;
-using AutoMapper;
+﻿using AutoMapper;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Ordering.API.Application.Dtos;
@@ -13,13 +11,10 @@ namespace Ordering.API.Application.Messages.Queries
         public class Query : IRequest<OrderDto>
         {
             public long orderId { get; set; }
-
         }
-
 
         public class Handler : IRequestHandler<Query, OrderDto>
         {
-
             private readonly DataContext dataContext;
             private readonly IMapper mapper;
 
@@ -31,12 +26,10 @@ namespace Ordering.API.Application.Messages.Queries
 
             public async Task<OrderDto> Handle(Query request, CancellationToken cancellationToken)
             {
-                var order = await dataContext.Orders.Include(o => o.Items).FirstOrDefaultAsync(o => o.OrderId == request.orderId);
+                var order = await dataContext.Orders.Include(o => o.Items).FirstOrDefaultAsync(o => o.Id == request.orderId);
 
                 return mapper.Map<OrderDto>(order);
-
             }
         }
-
     }
 }
